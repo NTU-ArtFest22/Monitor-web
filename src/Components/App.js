@@ -7,8 +7,10 @@ import ChatList from '../Containers/ChatList';
 const App = () => (
     <div>
         <Monitors />
-        <SendMsg />
-        <ChatList />
+        <div className="chatroom">
+            <ChatList />
+            <SendMsg />
+        </div>
     </div>
 );
 

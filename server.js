@@ -10,6 +10,7 @@ if (process.env.NODE_ENV === "development") {
         noInfo: true,
         stats: { colors: true },
         quiet: false,
+        hot: true,
         publicPath: config.output.publicPath
     }));
     app.use(require('webpack-hot-middleware')(compiler));

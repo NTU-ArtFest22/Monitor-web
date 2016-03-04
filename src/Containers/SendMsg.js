@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 let SendMsg = ({ onSubmit }) => (
-    <form onSubmit={onSubmit}>
-        <input type="text" ref={node => { input = node; }} />
-        <input type="submit" value="Send" />
+    <form className="send-msg-form" onSubmit={onSubmit}>
+        <input className="send-msg-input" type="text" ref={node => { input = node; }} />
+        <input className="send-msg-submit" type="submit" value="Send" />
     </form>
 );
 

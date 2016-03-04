@@ -15,7 +15,7 @@ class ChatList extends Component {
         let { records } = this.props;
 
         return (
-            <ul>
+            <ul className="chatlist">
                 {records.map( (record, i) => {
                     let { user, monitor, msg } = record;
                     return (

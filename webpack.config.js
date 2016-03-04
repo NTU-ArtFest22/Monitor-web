@@ -6,6 +6,7 @@ var precss = require('precss');
 module.exports = {
     entry: [
         'webpack/hot/dev-server',
+        'webpack-hot-middleware/client',
         './src/index'
     ],
     output: {
@@ -23,7 +24,7 @@ module.exports = {
             loader: 'json'
         }, {
             test: /\.css$/,
-            loader: "style-loader!css-loader!postcss-loader"
+            loaders: ["style-loader", "css-loader", "postcss-loader"]
         }]
     },
     postcss: function() {

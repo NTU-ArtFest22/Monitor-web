@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './Components/App';
+import style from './css/style.css';
 
 import ChatroomApp from './Reducers';
 
