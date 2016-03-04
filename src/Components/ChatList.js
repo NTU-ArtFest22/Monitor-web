@@ -6,7 +6,7 @@ class ChatList extends Component {
     componentDidMount() {
         let { socket, addMsgToList } = this.props;
 
-        socket.on('chat', function(data) {
+        socket.on('chat', (data) => {
             addMsgToList(data);
         });
     }
