@@ -2,7 +2,10 @@ import { handleActions } from 'redux-actions';
 
 const App = handleActions({
     SEND_MSG: (state, action) => {
-        state.socket.emit('chat', action.payload);
+        state.socket.emit('chat', {
+            monitor: state.monitor,
+            msg: action.payload
+        });
         return state;
     },
 
@@ -12,8 +15,17 @@ const App = handleActions({
             ...state.records,
             action.payload
         ]
-    })
+    }),
+
+    SWITCH_MONITOR: (state, action) => {
+        state.socket.emit('switch_monitor', action.payload);
+        return {
+            ...state,
+            monitor: action.payload
+        };
+    }
 }, {
+    monitor: 1,
     records: []
 });
 

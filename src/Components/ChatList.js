@@ -16,9 +16,12 @@ class ChatList extends Component {
 
         return (
             <ul>
-                {records.map( (record) => (
-                    <Chat>{record}</Chat>
-                ))}
+                {records.map( (record, i) => {
+                    let { user, monitor, msg } = record;
+                    return (
+                        <Chat key={i} user={user} monitor={monitor}>{msg}</Chat>
+                    );
+                })}
             </ul>
         );
     }

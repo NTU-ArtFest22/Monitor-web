@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Chat = ({ children }) => (
-    <li>{children}</li>
+const Chat = ({ user, monitor, children }) => (
+    <li>{user}({monitor}): {children}</li>
 );
 
 export default Chat;

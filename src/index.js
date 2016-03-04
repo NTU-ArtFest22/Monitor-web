@@ -16,7 +16,7 @@ import io from 'socket.io-client';
 
 const socket = io(window.location.origin);
 
-let store = createStore(ChatroomApp, {socket: socket, records: []},
+let store = createStore(ChatroomApp, {monitor: 1, socket: socket, records: []},
     compose(
         applyMiddleware(promiseMiddleware, logger),
         window.devToolsExtension ? window.devToolsExtension() : f => f
