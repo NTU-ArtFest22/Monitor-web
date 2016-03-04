@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 
 import Chat from './Chat';
 
@@ -8,6 +9,8 @@ class ChatList extends Component {
 
         socket.on('chat', (data) => {
             addMsgToList(data);
+            let dom = findDOMNode(this);
+            dom.scrollTop = dom.scrollHeight;
         });
     }
 

@@ -9,13 +9,49 @@ html, body {
     right: 0;
     top: 0;
     height: 100%;
-    width: 30%;
+    width: 340px;
     box-sizing: border-box;
     padding: 40px 20px;
+    border: 1px solid #000;
+
+    .chatlist {
+        position: relative;
+        padding: 0;
+        margin: 0 0 20px;
+        width: 100%;
+        height: calc(100% - 80px);
+        background-color: white;
+        list-style: none;
+        font-size: 1em;
+        line-height: 1.6em;
+        overflow: scroll;
+
+        .chat {
+            list-style-position: unset;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+    }
 
     .send-msg-form {
-        position: absolute;
-        bottom: 0;
+        position: relative;
         width: 100%;
+
+        .send-msg-input {
+            width: 100%;
+            box-sizing: border-box;
+            height: 50px;
+            font-size: 16px;
+            line-height: 1.5em;
+            padding: 2px 5px;
+        }
+
+        .send-msg-submit {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
     }
 }
