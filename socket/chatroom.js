@@ -1,10 +1,11 @@
-module.exports = function(io) {
+module.exports = (io) => {
+    "use strict";
 
-    io.on('connection', function(socket) {
+    io.on('connection', (socket) => {
         console.log('connected!');
 
-        socket.on('chat', function(data) {
-            var log = {
+        socket.on('chat', (data) => {
+            let log = {
                 user: socket.id,
                 user_ip: socket.handshake.address,
                 monitor: data.monitor,
@@ -14,7 +15,7 @@ module.exports = function(io) {
             io.emit('chat', log);
         });
 
-        socket.on('disconnect', function() {
+        socket.on('disconnect', () => {
             console.log('disconnect!');
         });
     });

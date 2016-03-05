@@ -1,10 +1,11 @@
-var express = require('express');
-var app = express();
+"use strict";
+const express = require('express');
+const app = express();
 
 if (process.env.NODE_ENV === "development") {
-    var webpack = require('webpack');
-    var config = require('./webpack.config.js');
-    var compiler = webpack(config);
+    const webpack = require('webpack');
+    const config = require('./webpack.config.js');
+    const compiler = webpack(config);
 
     app.use(require('webpack-dev-middleware')(compiler, {
         noInfo: true,
@@ -18,11 +19,11 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.static('public'));
 
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 require('./socket/chatroom.js')(io);
 
-var PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 server.listen(PORT);
