@@ -5,20 +5,23 @@ import Chat from './Chat';
 
 class ChatList extends Component {
     componentDidMount() {
-        let { socket, addMsgToList } = this.props;
+        let { socket, addMsgToList, setWillScroll } = this.props;
+        const dom = findDOMNode(this);
 
         socket.on('chat', (data) => {
+            let willScroll = dom.scrollTop + dom.clientHeight >= dom.scrollHeight;
+            setWillScroll(willScroll);
             addMsgToList(data);
-            let dom = findDOMNode(this);
-            dom.scrollTop = dom.scrollHeight;
+            if (willScroll)
+                dom.scrollTop = dom.scrollHeight - dom.clientHeight;
         });
     }
 
     render() {
-        let { records } = this.props;
+        let { records, willScroll, scrollHandler } = this.props;
 
         return (
-            <ul className="chatlist">
+            <ul className="chatlist" onScroll={scrollHandler}>
                 {records.map( (record, i) => {
                     let { user, monitor, msg } = record;
                     return (

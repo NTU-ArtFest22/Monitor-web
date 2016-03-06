@@ -17,6 +17,11 @@ const App = handleActions({
         ]
     }),
 
+    SET_WILL_SCROLL: (state, action) => ({
+        ...state,
+        willScroll: action.payload
+    }),
+
     SWITCH_MONITOR: (state, action) => {
         state.socket.emit('switch_monitor', action.payload);
         return {
@@ -26,7 +31,8 @@ const App = handleActions({
     }
 }, {
     monitor: 1,
-    records: []
+    records: [],
+    willScroll: true
 });
 
 export default App;

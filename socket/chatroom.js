@@ -1,3 +1,5 @@
+var emoji = require('emojilib').lib;
+
 module.exports = (io) => {
     "use strict";
 
@@ -5,11 +7,17 @@ module.exports = (io) => {
         console.log('connected!');
 
         socket.on('chat', (data) => {
+            let parseMsg = data.msg.replace(/:([0-9a-z_]+):/g, (match, p1) => (
+                emoji[p1] ? emoji[p1].char : match
+            ));
+            console.log(parseMsg);
+
             let log = {
                 user: socket.id,
                 user_ip: socket.handshake.address,
                 monitor: data.monitor,
-                msg: data.msg
+                msg: parseMsg,
+                received_time: new Date()
             };
             console.log(log);
             io.emit('chat', log);
