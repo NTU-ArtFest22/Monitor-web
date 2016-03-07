@@ -9,9 +9,15 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import createLogger from 'redux-logger';
-let logger = createLogger({
-    predicate: (gatState, action) => action.type !== 'PLAYER_TIMEUPDATE'
-});
+
+const middlewares = [promiseMiddleware];
+
+if (process.env.NODE_ENV === 'development') {
+    const logger = createLogger({
+        predicate: (gatState, action) => action.type !== 'SET_WILL_SCROLL'
+    });
+    middlewares.push(logger);
+}
 
 import io from 'socket.io-client';
 
@@ -19,7 +25,7 @@ const socket = io(window.location.origin);
 
 let store = createStore(ChatroomApp, {monitor: 1, socket: socket, records: [], willScroll: true},
     compose(
-        applyMiddleware(promiseMiddleware, logger),
+        applyMiddleware(...middlewares),
         window.devToolsExtension ? window.devToolsExtension() : f => f
     )
 );
