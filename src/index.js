@@ -10,6 +10,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import createLogger from 'redux-logger';
 
+import io from 'socket.io-client';
+
 const middlewares = [promiseMiddleware];
 
 if (process.env.NODE_ENV === 'development') {
@@ -19,7 +21,11 @@ if (process.env.NODE_ENV === 'development') {
     middlewares.push(logger);
 }
 
-let store = createStore(ChatroomApp,
+const initialState = window.__INITIAL_STATE__;
+
+initialState.socket = initialState.socket || io(window.location.host);
+
+let store = createStore(ChatroomApp, initialState,
     compose(
         applyMiddleware(...middlewares),
         window.devToolsExtension ? window.devToolsExtension() : f => f

@@ -1,7 +1,6 @@
-var emoji = require('emojilib').lib;
+import { lib as emoji } from 'emojilib';
 
-module.exports = (io) => {
-    "use strict";
+const chatroomSocket = (io) => {
 
     io.on('connection', (socket) => {
         console.log('connected!');
@@ -10,14 +9,12 @@ module.exports = (io) => {
             let parseMsg = data.msg.replace(/:([0-9a-z_]+):/g, (match, p1) => (
                 emoji[p1] ? emoji[p1].char : match
             ));
-            console.log(parseMsg);
 
             let log = {
+                ...data,
                 user: socket.id,
                 user_ip: socket.handshake.address,
-                monitor: data.monitor,
                 msg: parseMsg,
-                send_time: data.send_time,
                 received_time: Date.now()
             };
             console.log(log);
@@ -29,4 +26,8 @@ module.exports = (io) => {
         });
     });
 
+    return io;
+
 };
+
+export default chatroomSocket;
