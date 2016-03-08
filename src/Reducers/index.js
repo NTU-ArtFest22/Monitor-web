@@ -1,10 +1,13 @@
 import { handleActions } from 'redux-actions';
 
+import io from 'socket.io-client';
+
 const App = handleActions({
     SEND_MSG: (state, action) => {
         state.socket.emit('chat', {
             monitor: state.monitor,
-            msg: action.payload
+            msg: action.payload,
+            send_time: Date.now()
         });
         return state;
     },
@@ -30,6 +33,7 @@ const App = handleActions({
         };
     }
 }, {
+    socket: io(window.location.origin),
     monitor: 1,
     records: [],
     willScroll: true

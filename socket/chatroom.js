@@ -17,7 +17,8 @@ module.exports = (io) => {
                 user_ip: socket.handshake.address,
                 monitor: data.monitor,
                 msg: parseMsg,
-                received_time: new Date()
+                send_time: data.send_time,
+                received_time: Date.now()
             };
             console.log(log);
             io.emit('chat', log);

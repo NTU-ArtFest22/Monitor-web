@@ -19,11 +19,7 @@ if (process.env.NODE_ENV === 'development') {
     middlewares.push(logger);
 }
 
-import io from 'socket.io-client';
-
-const socket = io(window.location.origin);
-
-let store = createStore(ChatroomApp, {monitor: 1, socket: socket, records: [], willScroll: true},
+let store = createStore(ChatroomApp,
     compose(
         applyMiddleware(...middlewares),
         window.devToolsExtension ? window.devToolsExtension() : f => f

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
-import Chat from './Chat';
+import Chat from '../Containers/Chat';
 
 class ChatList extends Component {
     componentDidMount() {
