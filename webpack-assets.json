@@ -1,0 +1,9 @@
+{
+  "javascript": {
+    "main": "http://localhost:8081/public/bundle.js"
+  },
+  "styles": {},
+  "assets": {
+    "./src/css/style.css": "html, body {\n    padding: 0;\n    margin: 0;\n    background-color: white;\n}\n\n.chatroom {\n    position: absolute;\n    right: 0;\n    top: 0;\n    height: 100%;\n    width: 340px;\n    box-sizing: border-box;\n    padding: 40px 20px;\n    border: 1px solid #000;\n}\n\n.chatroom .chatlist {\n    position: relative;\n    padding: 0;\n    margin: 0 0 20px;\n    width: 100%;\n    height: calc(100% - 80px);\n    background-color: white;\n    list-style: none;\n    font-size: 1em;\n    line-height: 1.6em;\n    overflow: scroll;\n}\n\n.chatroom .chatlist .chat {\n    list-style-position: unset;\n    overflow: hidden;\n    word-wrap: break-word;\n}\n\n.chatroom .send-msg-form {\n    position: relative;\n    width: 100%;\n}\n\n.chatroom .send-msg-form .send-msg-input {\n    width: 100%;\n    box-sizing: border-box;\n    height: 50px;\n    font-size: 16px;\n    line-height: 1.5em;\n    padding: 2px 5px;\n}\n\n.chatroom .send-msg-form .send-msg-submit {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    margin: auto;\n}\n\n.chatroom .send-msg-form .new-msg-hint {\n    position: absolute;\n    top: -40px;\n    width: 100%;\n    text-align: center;\n    height: 40px;\n    line-height: 40px;\n    background-color: rgba(255, 255, 255, 0.8);\n}\n"
+  }
+}

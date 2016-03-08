@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --watch & NODE_ENV=development babel-node server.js",
+    "dev": "NODE_ENV=development babel-node webpack-dev-server.js",
     "build": "webpack",
+    "watch": "babel-node webpack-dev-server.js",
     "start": "NODE_ENV=production ./node_modules/.bin/babel-node server.js"
   },
   "author": "Kai Hao",
@@ -39,7 +40,8 @@
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-dev-server": "^1.12.1",
-    "webpack-hot-middleware": "^2.9.0"
+    "webpack-hot-middleware": "^2.9.0",
+    "webpack-isomorphic-tools": "^2.2.31"
   },
   "dependencies": {
     "babel-core": "^6.4.5",

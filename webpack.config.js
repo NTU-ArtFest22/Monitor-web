@@ -2,18 +2,29 @@ var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
+var Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin');
+import configuration from './webpack-isomorphic-tools-configuration';
+
+var webpack_isomorphic_tools_plugin =
+    // webpack-isomorphic-tools settings reside in a separate .js file
+    // (because they will be used in the web server code too).
+    new Webpack_isomorphic_tools_plugin(configuration)
+    // also enter development mode since it's a development webpack configuration
+    // (see below for explanation)
+    .development();
 
 module.exports = {
+    devtool: 'eval',
+    context: __dirname,
     entry: [
-        // 'webpack/hot/dev-server',
-        // 'webpack-hot-middleware/client',
+        'webpack-dev-server/client?http://localhost:8081',
         'webpack/hot/only-dev-server',
         './src/index'
     ],
     output: {
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js',
-        publicPath: '/'
+        publicPath: 'http://localhost:8081/public/'
     },
     module: {
         loaders: [{
@@ -37,6 +48,7 @@ module.exports = {
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        webpack_isomorphic_tools_plugin
     ]
 };

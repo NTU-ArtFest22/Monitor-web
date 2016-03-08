@@ -1,7 +1,7 @@
-import express from 'express';
+import Express from 'express';
 import { Server } from 'http';
 
-const app = express();
+const app = new Express();
 const server = Server(app);
 
 import { createStore, compose, applyMiddleware } from 'redux';
@@ -21,31 +21,24 @@ import chatroomSocket from './socket/chatroom';
 let io = ios(server);
 io = chatroomSocket(io);
 
-app.use(express.static('public'));
+app.use(Express.static('public'));
 
 const middlewares = [promiseMiddleware];
 
 if (process.env.NODE_ENV === "development") {
-    // const webpack = require('webpack');
-    // const config = require('./webpack.config.js');
-    // const compiler = webpack(config);
-    //
-    // app.use(require('webpack-dev-middleware')(compiler, {
-    //     noInfo: true,
-    //     stats: { colors: true },
-    //     quiet: false,
-    //     hot: true,
-    //     publicPath: config.output.publicPath
-    // }));
-    // app.use(require('webpack-hot-middleware')(compiler));
-
     const logger = createLogger({
         predicate: (gatState, action) => action.type !== 'SET_WILL_SCROLL'
     });
     middlewares.push(logger);
+
+
 }
 
 function handleRender(req, res) {
+    if (process.env.NODE_ENV === "development") {
+        global.webpack_isomorphic_tools.refresh();
+    }
+
     let initialState = {
         onlineCounter: 0,
         monitor: 1,
@@ -65,24 +58,27 @@ function handleRender(req, res) {
         </Provider>
     );
 
+    const styles = global.webpack_isomorphic_tools.assets().assets['./src/css/style.css'];
+
     const finalState = store.getState();
 
-    res.send(renderFullPage(html, finalState));
+    res.send(renderFullPage(html, styles, finalState));
 }
 
-function renderFullPage(html, initialState) {
+function renderFullPage(html, styles, initialState) {
     return `
         <!DOCTYPE HTML>
         <html>
         <head>
             <title>Socket.IO chat</title>
+            <style type="text/css">${styles}</style>
         </head>
         <body>
             <div id="root">${html}</div>
             <script>
               window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
             </script>
-            <script src="bundle.js"></script>
+            <script src="http://localhost:8081/public/bundle.js"></script>
         </body>
         </html>
     `;
