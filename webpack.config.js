@@ -5,8 +5,9 @@ var precss = require('precss');
 
 module.exports = {
     entry: [
-        'webpack/hot/dev-server',
-        'webpack-hot-middleware/client',
+        // 'webpack/hot/dev-server',
+        // 'webpack-hot-middleware/client',
+        'webpack/hot/only-dev-server',
         './src/index'
     ],
     output: {
