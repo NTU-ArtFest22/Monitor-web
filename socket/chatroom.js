@@ -1,9 +1,14 @@
 import { lib as emoji } from 'emojilib';
 
 const chatroomSocket = (io) => {
+    io.onlineCounter = {};
 
     io.on('connection', (socket) => {
-        console.log('connected!');
+
+        socket.on('user connected', (monior) => {
+            console.log(socket.id + ' connected!');
+            io.onlineCounter[socket.id] = monior;
+        });
 
         socket.on('chat', (data) => {
             let parseMsg = data.msg.replace(/:([0-9a-z_]+):/g, (match, p1) => (
@@ -22,7 +27,10 @@ const chatroomSocket = (io) => {
         });
 
         socket.on('disconnect', () => {
-            console.log('disconnect!');
+            if (io.onlineCounter[socket.id]) {
+                console.log(socket.id + ' disconnected!');
+                delete io.onlineCounter[socket.id];
+            }
         });
     });
 

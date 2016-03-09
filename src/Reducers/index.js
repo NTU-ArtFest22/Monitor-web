@@ -2,7 +2,10 @@ import { handleActions } from 'redux-actions';
 
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:8080');
+// const socket = io('http://localhost:8080');
+// socket.on('connect', () => {
+//     socket.emit('user connected');
+// });
 
 const App = handleActions({
     SEND_MSG: (state, action) => {
@@ -35,7 +38,7 @@ const App = handleActions({
     }
 }, {
     onlineCounter: 0,
-    socket: socket,
+    socket: {},
     monitor: 1,
     records: [],
     willScroll: true

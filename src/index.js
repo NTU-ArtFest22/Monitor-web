@@ -23,7 +23,12 @@ if (process.env.NODE_ENV === 'development') {
 
 const initialState = window.__INITIAL_STATE__;
 
-initialState.socket = initialState.socket || io(window.location.host);
+const socket = io('http://localhost:8080');
+socket.on('connect', () => {
+    socket.emit('user connected', initialState.monitor || 1);
+});
+
+initialState.socket = initialState.socket || socket;
 
 let store = createStore(ChatroomApp, initialState,
     compose(

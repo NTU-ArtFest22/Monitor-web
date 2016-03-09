@@ -25,22 +25,25 @@ app.use(Express.static('public'));
 
 const middlewares = [promiseMiddleware];
 
-if (process.env.NODE_ENV === "development") {
-    const logger = createLogger({
-        predicate: (gatState, action) => action.type !== 'SET_WILL_SCROLL'
-    });
-    middlewares.push(logger);
-
-
-}
-
 function handleRender(req, res) {
     if (process.env.NODE_ENV === "development") {
+        const logger = createLogger({
+            predicate: (gatState, action) => action.type !== 'SET_WILL_SCROLL'
+        });
+        middlewares.push(logger);
+
         global.webpack_isomorphic_tools.refresh();
     }
 
+    let onlineCounter = Object.keys(io.onlineCounter)
+        .reduce( (counters, id) => {
+            let monitor = io.onlineCounter[id];
+            counters[monitor] = counters[monitor] ? counters[monitor] + 1 : 1;
+            return counters;
+        }, {});
+
     let initialState = {
-        onlineCounter: 0,
+        onlineCounter,
         monitor: 1,
         records: [],
         willScroll: true
