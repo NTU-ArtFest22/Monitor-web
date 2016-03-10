@@ -14,7 +14,6 @@
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.3.2",
-    "babel-cli": "^6.6.5",
     "babel-core": "^6.6.0",
     "babel-eslint": "^5.0.0",
     "babel-polyfill": "^6.6.1",
@@ -44,6 +43,7 @@
     "webpack-isomorphic-tools": "^2.2.31"
   },
   "dependencies": {
+    "babel-cli": "^6.6.5",
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
     "emojilib": "^2.0.2",

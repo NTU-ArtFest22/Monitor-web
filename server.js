@@ -4,6 +4,9 @@ import { Server } from 'http';
 const app = new Express();
 const server = Server(app);
 
+const HOST = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 8080;
+
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
@@ -81,14 +84,12 @@ function renderFullPage(html, styles, initialState) {
             <script>
               window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
             </script>
-            <script src="${process.env.NODE_ENV === 'development' ? 'http://localhost:8081/public/bundle.js' : 'bundle.js'}"></script>
+            <script src="${process.env.NODE_ENV === 'development' ? `http://${HOST}:${PORT}/public/bundle.js` : 'bundle.js'}"></script>
         </body>
         </html>
     `;
 }
 
 app.use(handleRender);
-
-const PORT = process.env.PORT || 8080;
 
 server.listen(PORT);
