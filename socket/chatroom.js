@@ -12,8 +12,6 @@ function mapListToCounter(onlineCounter) {
 const chatroomSocket = (io) => {
     io.onlineCounter = {};
 
-    io.onlineCounter = 0;
-
     io.on('connection', (socket) => {
 
         socket.on('user_connected', (monitor) => {
