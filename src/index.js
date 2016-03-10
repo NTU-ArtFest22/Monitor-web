@@ -12,6 +12,8 @@ import createLogger from 'redux-logger';
 
 import io from 'socket.io-client';
 
+import { counterChanged } from './Actions/Socket';
+
 const middlewares = [promiseMiddleware];
 
 if (process.env.NODE_ENV === 'development') {
@@ -25,7 +27,7 @@ const initialState = window.__INITIAL_STATE__;
 
 const socket = io('http://localhost:8080');
 socket.on('connect', () => {
-    socket.emit('user connected', initialState.monitor || 1);
+    socket.emit('user_connected', initialState.monitor || 1);
 });
 
 initialState.socket = initialState.socket || socket;
@@ -36,6 +38,10 @@ let store = createStore(ChatroomApp, initialState,
         window.devToolsExtension ? window.devToolsExtension() : f => f
     )
 );
+
+socket.on('counter_changed', (onlineCounter) => {
+    store.dispatch(counterChanged(onlineCounter));
+});
 
 render(
     <Provider store={store}>

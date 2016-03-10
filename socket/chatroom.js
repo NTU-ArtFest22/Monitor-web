@@ -1,13 +1,23 @@
 import { lib as emoji } from 'emojilib';
 
+function mapListToCounter(onlineCounter) {
+    return Object.keys(onlineCounter)
+        .reduce( (counters, id) => {
+            let monitor = onlineCounter[id];
+            counters[monitor] = counters[monitor] ? counters[monitor] + 1 : 1;
+            return counters;
+        }, {});
+}
+
 const chatroomSocket = (io) => {
     io.onlineCounter = {};
 
     io.on('connection', (socket) => {
 
-        socket.on('user connected', (monior) => {
+        socket.on('user_connected', (monitor) => {
             console.log(socket.id + ' connected!');
-            io.onlineCounter[socket.id] = monior;
+            io.onlineCounter[socket.id] = monitor;
+            io.emit('counter_changed', mapListToCounter(io.onlineCounter));
         });
 
         socket.on('chat', (data) => {
@@ -30,6 +40,7 @@ const chatroomSocket = (io) => {
             if (io.onlineCounter[socket.id]) {
                 console.log(socket.id + ' disconnected!');
                 delete io.onlineCounter[socket.id];
+                io.emit('counter_changed', mapListToCounter(io.onlineCounter));
             }
         });
     });

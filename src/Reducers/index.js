@@ -1,12 +1,5 @@
 import { handleActions } from 'redux-actions';
 
-import io from 'socket.io-client';
-
-// const socket = io('http://localhost:8080');
-// socket.on('connect', () => {
-//     socket.emit('user connected');
-// });
-
 const App = handleActions({
     SEND_MSG: (state, action) => {
         state.socket.emit('chat', {
@@ -30,12 +23,17 @@ const App = handleActions({
     }),
 
     SWITCH_MONITOR: (state, action) => {
-        state.socket.emit('switch_monitor', action.payload);
+        state.socket.emit('user_connected', action.payload);
         return {
             ...state,
             monitor: action.payload
         };
-    }
+    },
+
+    COUNTER_CHANGED: (state, action) => ({
+        ...state,
+        onlineCounter: action.payload
+    })
 }, {
     onlineCounter: 0,
     socket: {},
