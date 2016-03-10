@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const initialState = window.__INITIAL_STATE__;
 
-const socket = io('http://localhost:8080');
+const socket = io(window.location.origin);
 socket.on('connect', () => {
     socket.emit('user_connected', initialState.monitor || 1);
 });
