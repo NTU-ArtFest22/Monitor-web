@@ -8,7 +8,7 @@
     "dev": "NODE_ENV=development babel-node webpack-dev-server.js",
     "build": "webpack",
     "watch": "babel-node webpack-dev-server.js",
-    "start": "NODE_ENV=production ./node_modules/.bin/babel-node server.js"
+    "start": "NODE_ENV=production ./node_modules/.bin/babel-node app.js"
   },
   "author": "Kai Hao",
   "license": "MIT",

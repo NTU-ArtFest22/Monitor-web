@@ -81,7 +81,7 @@ function renderFullPage(html, styles, initialState) {
             <script>
               window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
             </script>
-            <script src="http://localhost:8081/public/bundle.js"></script>
+            <script src="${process.env.NODE_ENV === 'development' ? 'http://localhost:8081/public/bundle.js' : 'bundle.js'}"></script>
         </body>
         </html>
     `;
