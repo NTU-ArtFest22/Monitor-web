@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development babel-node server.js",
+    "dev": "NODE_ENV=development babel-node webpack-dev-server.js",
     "build": "webpack",
-    "start": "NODE_ENV=production node server.js"
+    "watch": "babel-node webpack-dev-server.js",
+    "start": "NODE_ENV=production ./node_modules/.bin/babel-node app.js"
   },
   "author": "Kai Hao",
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.3.2",
-    "babel-cli": "^6.6.0",
+    "babel-cli": "^6.6.5",
     "babel-core": "^6.6.0",
     "babel-eslint": "^5.0.0",
     "babel-polyfill": "^6.6.1",
@@ -39,7 +40,8 @@
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-dev-server": "^1.12.1",
-    "webpack-hot-middleware": "^2.9.0"
+    "webpack-hot-middleware": "^2.9.0",
+    "webpack-isomorphic-tools": "^2.2.31"
   },
   "dependencies": {
     "babel-core": "^6.4.5",

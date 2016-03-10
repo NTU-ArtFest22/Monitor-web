@@ -17,14 +17,12 @@ module.exports = {
     devtool: 'eval',
     context: __dirname,
     entry: [
-        'webpack-dev-server/client?http://localhost:8081',
-        'webpack/hot/only-dev-server',
         './src/index'
     ],
     output: {
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js',
-        publicPath: 'http://localhost:8081/public/'
+        publicPath: '/public/'
     },
     module: {
         loaders: [{
@@ -47,7 +45,11 @@ module.exports = {
             'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
         new webpack.NoErrorsPlugin(),
         webpack_isomorphic_tools_plugin
     ]

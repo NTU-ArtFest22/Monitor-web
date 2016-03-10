@@ -1,0 +1,9 @@
+{
+  "javascript": {
+    "main": "/public/bundle.js"
+  },
+  "styles": {},
+  "assets": {
+    "./src/css/style.css": "body,html{padding:0;margin:0;background-color:#fff}.chatroom{position:absolute;right:0;top:0;height:100%;width:340px;box-sizing:border-box;padding:40px 20px;border:1px solid #000}.chatroom .chatlist{position:relative;padding:0;margin:0 0 20px;width:100%;height:calc(100% - 80px);background-color:#fff;list-style:none;font-size:1em;line-height:1.6em;overflow:scroll}.chatroom .chatlist .chat{list-style-position:unset;overflow:hidden;word-wrap:break-word}.chatroom .send-msg-form{position:relative;width:100%}.chatroom .send-msg-form .send-msg-input{width:100%;box-sizing:border-box;height:50px;font-size:16px;line-height:1.5em;padding:2px 5px}.chatroom .send-msg-form .send-msg-submit{position:absolute;top:0;right:0;bottom:0;margin:auto}.chatroom .send-msg-form .new-msg-hint{position:absolute;top:-40px;width:100%;text-align:center;height:40px;line-height:40px;background-color:hsla(0,0%,100%,.8)}"
+  }
+}

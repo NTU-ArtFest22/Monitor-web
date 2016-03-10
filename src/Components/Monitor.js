@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Monitor = ({ active, monitor, switchMonitor }) => {
+const Monitor = ({ active, monitor, counter, switchMonitor }) => {
     if (active) {
-        return (<span>{monitor}</span>);
+        return (<span>{monitor}:{counter}</span>);
     }
     else {
-        return (<a href="#" onClick={switchMonitor}>{monitor}</a>);
+        return (<a href={'#' + monitor} onClick={switchMonitor}>{monitor}:{counter}</a>);
     }
 };
 

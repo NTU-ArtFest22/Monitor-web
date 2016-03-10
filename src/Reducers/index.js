@@ -1,13 +1,10 @@
 import { handleActions } from 'redux-actions';
 
-import io from 'socket.io-client';
-
 const App = handleActions({
     SEND_MSG: (state, action) => {
         state.socket.emit('chat', {
-            monitor: state.monitor,
-            msg: action.payload,
-            send_time: Date.now()
+            ...action.payload,
+            monitor: state.monitor
         });
         return state;
     },
@@ -26,14 +23,20 @@ const App = handleActions({
     }),
 
     SWITCH_MONITOR: (state, action) => {
-        state.socket.emit('switch_monitor', action.payload);
+        state.socket.emit('user_connected', action.payload);
         return {
             ...state,
             monitor: action.payload
         };
-    }
+    },
+
+    COUNTER_CHANGED: (state, action) => ({
+        ...state,
+        onlineCounter: action.payload
+    })
 }, {
-    socket: io(window.location.origin),
+    onlineCounter: 0,
+    socket: {},
     monitor: 1,
     records: [],
     willScroll: true
