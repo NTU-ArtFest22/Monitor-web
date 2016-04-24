@@ -72,8 +72,7 @@ function handleRender(req, res) {
 }
 
 function renderFullPage(html, styles, initialState) {
-    return `
-        <!DOCTYPE HTML>
+    return `<!DOCTYPE HTML>
         <html>
         <head>
             <title>Socket.IO chat</title>
@@ -86,8 +85,7 @@ function renderFullPage(html, styles, initialState) {
             </script>
             <script src="${process.env.NODE_ENV === 'development' ? `http://${HOST}:${PORT}/public/bundle.js` : 'bundle.js'}"></script>
         </body>
-        </html>
-    `;
+        </html>`;
 }
 
 app.use(handleRender);
