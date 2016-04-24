@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions';
 const App = handleActions({
     SEND_MSG: (state, action) => {
         state.socket.emit('chat', {
-            ...action.payload,
+            ...action.payload.substring(0, 100),
             monitor: state.monitor
         });
         return state;

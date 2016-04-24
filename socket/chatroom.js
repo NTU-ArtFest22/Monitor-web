@@ -23,7 +23,7 @@ const chatroomSocket = (io) => {
         socket.on('chat', (data) => {
             let parseMsg = data.msg.replace(/:([0-9a-z_]+):/g, (match, p1) => (
                 emoji[p1] ? emoji[p1].char : match
-            ));
+            )).substring(0, 100);
 
             let log = {
                 ...data,
