@@ -6,6 +6,7 @@ const server = Server(app);
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
+const DEV_PORT = process.env.PORT || 8081;
 
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -48,6 +49,33 @@ function handleRender(req, res) {
     let initialState = {
         onlineCounter,
         monitor: 1,
+        monitors: ["eH7hBiY9xkg", "mx6t6E24SSM", "2WMnw14bHbM", "8B3jQP9gNyg", "KF47Za1lfjM", "njCDZWTI-xg"],
+        players: {
+            'monitor1': {
+                src: "eH7hBiY9xkg",
+                player: null
+            },
+            'monitor2': {
+                src: "mx6t6E24SSM",
+                player: null
+            },
+            'monitor3': {
+                src: "2WMnw14bHbM",
+                player: null
+            },
+            'monitor4': {
+                src: "8B3jQP9gNyg",
+                player: null
+            },
+            'monitor5': {
+                src: "KF47Za1lfjM",
+                player: null
+            },
+            'monitor6': {
+                src: "njCDZWTI",
+                player: null
+            }
+        },
         records: [],
         willScroll: true
     };
@@ -83,7 +111,7 @@ function renderFullPage(html, styles, initialState) {
             <script>
               window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
             </script>
-            <script src="${process.env.NODE_ENV === 'development' ? `http://${HOST}:${PORT}/public/bundle.js` : 'bundle.js'}"></script>
+            <script src="${process.env.NODE_ENV === 'development' ? `http://${HOST}:${DEV_PORT}/public/bundle.js` : 'bundle.js'}"></script>
         </body>
         </html>`;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Monitor = ({ active, monitor, counter, switchMonitor }) => {
+const Monitor = ({ active, monitor, counter, switchMonitor, src }) => {
     if (active) {
         return (<span>{monitor}:{counter}</span>);
     }

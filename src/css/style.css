@@ -4,6 +4,10 @@ html, body {
     background-color: white;
 }
 
+.body {
+    width: calc(100vw - 340px);
+}
+
 .chatroom {
     position: absolute;
     right: 0;

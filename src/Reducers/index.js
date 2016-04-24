@@ -34,6 +34,18 @@ const App = handleActions({
     COUNTER_CHANGED: (state, action) => ({
         ...state,
         onlineCounter: action.payload
+    }),
+
+
+    SET_PLAYER: (state, action) => ({
+        ...state,
+        players: {
+            ...state.players,
+            [action.payload.monitor]: {
+                ...state.players[action.payload.monitor],
+                player: action.payload.player
+            }
+        }
     })
 }, {
     onlineCounter: 0,
