@@ -39,14 +39,12 @@ const App = handleActions({
 
     SET_PLAYER: (state, action) => ({
         ...state,
-        players: [
-            ...state.players.slice(0, action.payload.monitor - 1),
-            {
-                ...state.players[action.payload.monitor - 1],
-                player: action.payload.player
-            },
-            ...state.players.slice(action.payload.monitor)
-        ]
+        player: action.payload
+    }),
+
+    TOGGLE_SHOW_CHAT: (state) => ({
+        ...state,
+        showChat: !state.showChat
     })
 }, {
     onlineCounter: 0,

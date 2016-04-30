@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
+import classNames from 'classnames';
 
 import Chat from '../Containers/Chat';
 
@@ -18,7 +19,7 @@ class ChatList extends Component {
     }
 
     render() {
-        let { records, willScroll, scrollHandler } = this.props;
+        let { records, willScroll, scrollHandler, showChat } = this.props;
 
         return (
             <ul className="chatlist" onScroll={scrollHandler}>

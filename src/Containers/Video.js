@@ -3,7 +3,8 @@ import video from '../Components/Video';
 import { setPlayer } from '../Actions/Videos';
 
 const mapStateToProps = (state, ownProps) => ({
-    src: state.players[state.monitor - 1].src
+    src: state.players[state.monitor - 1].src,
+    player: state.player
 });
 
 const mapDispatchToProps = (dispatch) => ({

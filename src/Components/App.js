@@ -1,17 +1,19 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import Monitors from '../Containers/Monitors';
 import Video from '../Containers/Video';
 import SendMsg from '../Containers/SendMsg';
 import ChatList from '../Containers/ChatList';
 
-const App = () => (
+const App = ({ showChat, toggleShowChat }) => (
     <div>
-        <div className="body">
+        <div className={classNames('body', { 'showChat': showChat })}>
             <Video />
             <Monitors />
         </div>
-        <div className="chatroom">
+        <div className={classNames('chatroom', { 'showChat': showChat })}>
+            <a className="toggleShowChat" onClick={toggleShowChat}>toggle</a>
             <ChatList />
             <SendMsg />
         </div>

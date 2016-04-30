@@ -7,15 +7,26 @@ class Video extends React.Component {
             event.target.playVideo();
         }
 
-        // this.props.setPlayer(event.target, this.props.monitor);
+        this.props.setPlayer(event.target);
     }
-    componentWillReceiveProps(nextProps) {
-        if (this.props.player) {
-            if (nextProps.active) {
-                this.props.player.playVideo();
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.player) {
+    //         if (nextProps.active) {
+    //             this.props.player.playVideo();
+    //         }
+    //         else {
+    //             this.props.player.stopVideo();
+    //         }
+    //     }
+    // }
+    togglePlay() {
+        const { player } = this.props;
+        if (player) {
+            if (player.getPlayerState() === 1) {
+                player.pauseVideo();
             }
             else {
-                this.props.player.stopVideo();
+                player.playVideo();
             }
         }
     }
@@ -35,7 +46,10 @@ class Video extends React.Component {
         };
 
         return (
-            <Youtube videoId={src} className="player" id={`monitor${monitor}`} opts={opts} onReady={this._onReady.bind(this)} />
+            <div className="playerWrapper">
+                <Youtube videoId={src} className="player" id={`monitor${monitor}`} opts={opts} onReady={this._onReady.bind(this)} />
+                <div className="playerBlocker" onClick={this.togglePlay.bind(this)}></div>
+            </div>
         );
     }
 }

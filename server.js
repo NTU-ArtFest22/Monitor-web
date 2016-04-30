@@ -50,6 +50,7 @@ function handleRender(req, res) {
         onlineCounter,
         monitor: 1,
         monitors: ["eH7hBiY9xkg", "mx6t6E24SSM", "2WMnw14bHbM", "8B3jQP9gNyg", "KF47Za1lfjM", "njCDZWTI-xg"],
+        player: null,
         players: [
             {
                 src: "eH7hBiY9xkg",
@@ -96,6 +97,7 @@ function handleRender(req, res) {
                 player: null
             }
         ],
+        showChat: true,
         records: [],
         willScroll: true
     };
