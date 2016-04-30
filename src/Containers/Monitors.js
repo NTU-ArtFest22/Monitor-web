@@ -3,7 +3,7 @@ import monitors from '../Components/Monitors';
 import { switchMonitor } from '../Actions/Monitors';
 
 const mapStateToProps = (state) => ({
-    src: state.monitors[state.monitor - 1]
+    players: state.players
 });
 
 const mapDispatchToProps = (dispatch) => ({

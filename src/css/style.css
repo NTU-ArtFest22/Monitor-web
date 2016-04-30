@@ -6,6 +6,14 @@ html, body {
 
 .body {
     width: calc(100vw - 340px);
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    display: flex;
+    justify-content: space-between;
 }
 
 .chatroom {
@@ -70,12 +78,52 @@ html, body {
     }
 }
 
-.player {
-    width: 320px;
-    height: 180px;
+.monitors {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #000;
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 208px;
+    align-self: flex-end;
+}
+
+.monitor {
+    height: 117px;
+    width: 208px;
+    float: right;
+    display: block;
+    position: relative;
+    cursor: pointer;
+
+    img {
+        width: 100%;
+    }
+
+    p {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        margin: 0;
+    }
 
     &.active {
         width: 640px;
         height: 360px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
     }
+}
+
+.player {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+
 }

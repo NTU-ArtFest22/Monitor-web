@@ -1,15 +1,15 @@
 import React from 'react';
 
 import Monitors from '../Containers/Monitors';
-import Videos from '../Containers/Videos';
+import Video from '../Containers/Video';
 import SendMsg from '../Containers/SendMsg';
 import ChatList from '../Containers/ChatList';
 
 const App = () => (
     <div>
         <div className="body">
+            <Video />
             <Monitors />
-            <Videos />
         </div>
         <div className="chatroom">
             <ChatList />

@@ -6,7 +6,7 @@ class Videos extends React.Component {
         const { monitors, players } = this.props;
 
         return (
-            <div>
+            <div className="players">
                 {players.map( (player, i) => (
                     <Video key={player.src} src={player.src} monitor={i + 1} />
                 ))}
