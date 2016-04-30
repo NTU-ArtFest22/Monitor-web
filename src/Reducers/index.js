@@ -39,13 +39,14 @@ const App = handleActions({
 
     SET_PLAYER: (state, action) => ({
         ...state,
-        players: {
-            ...state.players,
-            [action.payload.monitor]: {
-                ...state.players[action.payload.monitor],
+        players: [
+            ...state.players.slice(0, action.payload.monitor - 1),
+            {
+                ...state.players[action.payload.monitor - 1],
                 player: action.payload.player
-            }
-        }
+            },
+            ...state.players.slice(action.payload.monitor)
+        ]
     })
 }, {
     onlineCounter: 0,

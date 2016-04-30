@@ -50,32 +50,32 @@ function handleRender(req, res) {
         onlineCounter,
         monitor: 1,
         monitors: ["eH7hBiY9xkg", "mx6t6E24SSM", "2WMnw14bHbM", "8B3jQP9gNyg", "KF47Za1lfjM", "njCDZWTI-xg"],
-        players: {
-            'monitor1': {
+        players: [
+            {
                 src: "eH7hBiY9xkg",
                 player: null
             },
-            'monitor2': {
+            {
                 src: "mx6t6E24SSM",
                 player: null
             },
-            'monitor3': {
+            {
                 src: "2WMnw14bHbM",
                 player: null
             },
-            'monitor4': {
+            {
                 src: "8B3jQP9gNyg",
                 player: null
             },
-            'monitor5': {
+            {
                 src: "KF47Za1lfjM",
                 player: null
             },
-            'monitor6': {
+            {
                 src: "njCDZWTI",
                 player: null
             }
-        },
+        ],
         records: [],
         willScroll: true
     };

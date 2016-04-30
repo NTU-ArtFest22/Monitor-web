@@ -1,29 +1,40 @@
 import React from 'react';
+import Youtube from 'react-youtube';
 
 class Video extends React.Component {
-    componentDidMount() {
-        const { setPlayer, id, src, active } = this.props;
+    _onReady(event) {
+        if (this.props.active) {
+            event.target.playVideo();
+        }
 
-        window.onYouTubeIframeAPIReady = () => {
-            setPlayer(new window.YT.Player(id, {
-                height: active ? 315 : 157,
-                width: active ? 560 : 280,
-                videoId: src,
-                events: {
-                    'onReady': this._onPlayerReady,
-                    'onStateChange': this._onPlayerStateChange
-                }
-            }), id);
-        };
+        this.props.setPlayer(event.target, this.props.monitor);
     }
-    onPlayerReady() {
-        console.log('ready');
+    componentWillReceiveProps(nextProps) {
+        if (this.props.player) {
+            if (nextProps.active) {
+                this.props.player.playVideo();
+            }
+            else {
+                this.props.player.stopVideo();
+            }
+        }
     }
 
     render() {
-        const { monitor } = this.props;
+        const { src, monitor, active } = this.props;
+        const opts = {
+            playerVars: {
+                cc_load_policy: 1,
+                controls: 0,
+                enablejsapi: 1,
+                iv_load_policy: 3,
+                rel: 0,
+                showinfo: 0
+            }
+        };
+
         return (
-            <div id={`monitor${monitor}`}></div>
+            <Youtube videoId={src} className={active ? 'player active' : 'player'} id={`monitor${monitor}`} opts={opts} onReady={this._onReady.bind(this)} />
         );
     }
 }

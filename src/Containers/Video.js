@@ -4,7 +4,7 @@ import { setPlayer } from '../Actions/Videos';
 
 const mapStateToProps = (state, ownProps) => ({
     active: state.monitor === ownProps.monitor,
-    player: state.players[`monitor${ownProps.monitor}`].player
+    player: state.players[ownProps.monitor - 1].player
 });
 
 const mapDispatchToProps = (dispatch) => ({
