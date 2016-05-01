@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 let SendMsg = ({ onSubmit, willScroll }) => (
     <form className="send-msg-form" onSubmit={onSubmit}>
-        <input className="send-msg-input" placeholder="傳送訊息" type="text" ref={node => { input = node; }} />
+        <textarea className="send-msg-input" placeholder="傳送訊息" type="text" ref={node => { input = node; }} />
         <input className="send-msg-submit" type="submit" value="Send" />
         {willScroll ? '' : (<div className="new-msg-hint">new</div>)}
     </form>

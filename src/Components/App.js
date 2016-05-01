@@ -13,7 +13,9 @@ const App = ({ showChat, toggleShowChat }) => (
             <Monitors />
         </div>
         <div className={classNames('chatroom', { 'showChat': showChat })}>
-            <a className="toggleShowChat" onClick={toggleShowChat}>toggle</a>
+            <a className="toggleShowChat" onClick={toggleShowChat}>
+                <div className="after"></div>
+            </a>
             <ChatList />
             <SendMsg />
         </div>

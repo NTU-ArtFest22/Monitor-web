@@ -36,20 +36,47 @@ html, body {
     width: 340px;
     box-sizing: border-box;
     padding: 40px 20px;
-    border: 1px solid #000;
+    border: 1px solid #555;
     transition: right 0.5s ease-out;
 
     &.showChat {
         right: 0;
+
+        .toggleShowChat {
+            left: 0;
+
+            .after {
+                transform: translateX(-20%) rotate(135deg);
+            }
+        }
     }
 
     .toggleShowChat {
         position: absolute;
         top: 0;
-        left: -20px;
-        width: 20px;
-        height: 20px;
-        background-color: #000;
+        left: -28px;
+        width: 25px;
+        height: 25px;
+        background-color: #FFF;
+        border: 1px solid #555;
+        transition: left 0.5s ease-out;
+        cursor: pointer;
+
+        .after {
+            position: absolute;
+            height: 10px;
+            width: 10px;
+            border-left: 1px solid #555;
+            border-right: 0;
+            border-top: 1px solid #555;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            transform: translateX(20%) rotate(-45deg);
+            transition: transform 0.5s ease-out;
+        }
     }
 
     .chatlist {
@@ -63,6 +90,9 @@ html, body {
         font-size: 1em;
         line-height: 1.6em;
         overflow: scroll;
+        border: 1px solid #CCC;
+        padding: 5px;
+        box-sizing: border-box;
 
         .chat {
             list-style-position: unset;
@@ -78,10 +108,13 @@ html, body {
         .send-msg-input {
             width: 100%;
             box-sizing: border-box;
-            height: 50px;
+            height: 70px;
             font-size: 16px;
             line-height: 1.5em;
             padding: 2px 5px;
+            padding-right: 50px;
+            resize: none;
+            border-color: #CCC;
         }
 
         .send-msg-submit {
@@ -90,6 +123,7 @@ html, body {
             right: 0;
             bottom: 0;
             margin: auto;
+            width: 50px;
         }
 
         .new-msg-hint {
