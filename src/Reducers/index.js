@@ -45,6 +45,10 @@ const App = handleActions({
     TOGGLE_SHOW_CHAT: (state) => ({
         ...state,
         showChat: !state.showChat
+    }),
+
+    SEND_CONTROL_MSG: (state) => ({
+        ...state
     })
 }, {
     onlineCounter: 0,

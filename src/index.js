@@ -13,6 +13,7 @@ import createLogger from 'redux-logger';
 import io from 'socket.io-client';
 
 import { counterChanged } from './Actions/Socket';
+import { switchMonitor } from './Actions/Monitors';
 
 const middlewares = [promiseMiddleware];
 
@@ -30,6 +31,8 @@ socket.on('connect', () => {
     socket.emit('user_connected', initialState.monitor || 1);
 });
 
+const stageSocket = io('http://localhost:9000');
+
 initialState.socket = initialState.socket || socket;
 
 let store = createStore(ChatroomApp, initialState,
@@ -41,6 +44,22 @@ let store = createStore(ChatroomApp, initialState,
 
 socket.on('counter_changed', (onlineCounter) => {
     store.dispatch(counterChanged(onlineCounter));
+});
+
+stageSocket.on('control', move => {
+    const cur = store.getState().monitor;
+    const len = store.getState().players.length;
+
+    if (move === "up") {
+        store.dispatch(switchMonitor(cur > 0 ? cur - 1 : len - 1));
+    }
+    else if (move === "down") {
+        store.dispatch(switchMonitor(cur < len - 1 ? cur + 1 : 0));
+    }
+});
+
+stageSocket.on('connect', () => {
+    
 });
 
 render(

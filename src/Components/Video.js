@@ -49,6 +49,10 @@ class Video extends React.Component {
             <div className="playerWrapper">
                 <Youtube videoId={src} className="player" id={`monitor${monitor}`} opts={opts} onReady={this._onReady.bind(this)} />
                 <div className="playerBlocker" onClick={this.togglePlay.bind(this)}></div>
+                <div className="control-group">
+                    <div className="left" onClick={() => this.props.sendControlMsg('left')}></div>
+                    <div className="right" onClick={() => this.props.sendControlMsg('right')}></div>
+                </div>
             </div>
         );
     }

@@ -3,10 +3,12 @@ import { Server } from 'http';
 
 const app = new Express();
 const server = Server(app);
+const stageServer = Server(new Express());
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
 const DEV_PORT = process.env.PORT || 8081;
+const STAGE_PORT = process.env.STAGE_PORT || 9000;
 
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -22,8 +24,11 @@ import App from './src/Components/App.js';
 import ios from 'socket.io';
 
 import chatroomSocket from './socket/chatroom';
+import stageSocket from './socket/stage';
 let io = ios(server);
+let stageIo = ios(stageServer);
 io = chatroomSocket(io);
+stageIo = stageSocket(stageIo);
 
 app.use(Express.static('public'));
 
@@ -49,9 +54,23 @@ function handleRender(req, res) {
     let initialState = {
         onlineCounter,
         monitor: 1,
-        monitors: ["eH7hBiY9xkg", "mx6t6E24SSM", "2WMnw14bHbM", "8B3jQP9gNyg", "KF47Za1lfjM", "njCDZWTI-xg"],
         player: null,
         players: [
+            {
+                src: "2O0QlJz8EFc"
+            },
+            {
+                src: "JTIWNoUDHP4"
+            },
+            {
+                src: "RHmH_uq9Ops"
+            },
+            {
+                src: "EyepEXOlRmY"
+            },
+            {
+                src: "GLE9_LwzDjs"
+            },
             {
                 src: "eH7hBiY9xkg",
                 player: null
@@ -70,30 +89,6 @@ function handleRender(req, res) {
             },
             {
                 src: "KF47Za1lfjM",
-                player: null
-            },
-            {
-                src: "H89aOuLFsgI",
-                player: null
-            },
-            {
-                src: "gq11un3xqsA",
-                player: null
-            },
-            {
-                src: "xTyRYCDN90U",
-                player: null
-            },
-            {
-                src: "ArVmnth5jB4",
-                player: null
-            },
-            {
-                src: "kqANd2aw8Mc",
-                player: null
-            },
-            {
-                src: "HiD-gSr_B78",
                 player: null
             }
         ],
@@ -141,3 +136,4 @@ function renderFullPage(html, styles, initialState) {
 app.use(handleRender);
 
 server.listen(PORT);
+stageServer.listen(STAGE_PORT);
