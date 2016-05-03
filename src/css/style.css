@@ -98,6 +98,54 @@ html, body {
             list-style-position: unset;
             overflow: hidden;
             word-wrap: break-word;
+            display: flex;
+            height: 30px;
+            align-items: center;
+
+            .chat-monitor {
+                text-decoration: none;
+                color: #FFF;
+                display: inline-block;
+                height: 30px;
+                width: 30px;
+                text-align: center;
+                position: relative;
+                margin-right: 3px;
+
+                .before {
+                    position: absolute;
+                    height: 17px;
+                    width: 20px;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto 0;
+                    background-color: #555;
+                    border-radius: 3px;
+                    left: 1px;
+                }
+                .after {
+                    position: absolute;
+                    height: 0;
+                    width: 0;
+                    right: 2px;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto 0;
+                    border-top: 8px solid transparent;
+                    border-bottom: 8px solid transparent;
+                    border-right: 8px solid #555;
+                }
+                .text {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    margin-left: 0;
+                    margin-right: 0;
+                    margin-left: -8px;
+                    top: 4px;
+                    font-size: 14px;
+                }
+            }
         }
     }
 

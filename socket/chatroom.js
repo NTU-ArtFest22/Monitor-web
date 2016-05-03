@@ -1,5 +1,8 @@
 import { lib as emoji } from 'emojilib';
 import { getColor } from 'random-material-color';
+import Firebase from 'firebase';
+
+const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
 
 function mapListToCounter(onlineCounter) {
     return Object.keys(onlineCounter)
@@ -34,7 +37,9 @@ const chatroomSocket = (io) => {
                 received_time: Date.now(),
                 user_color: getColor({ text: socket.id })
             };
+
             console.log(log);
+            fireRef.push(log);
             io.emit('chat', log);
         });
 

@@ -39,6 +39,7 @@
     "emojilib": "^2.0.2",
     "exports-loader": "^0.6.3",
     "express": "^4.13.4",
+    "firebase": "^2.4.2",
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
     "mqtt": "^1.10.0",
