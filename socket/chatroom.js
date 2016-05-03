@@ -1,4 +1,5 @@
 import { lib as emoji } from 'emojilib';
+import { getColor } from 'random-material-color';
 
 function mapListToCounter(onlineCounter) {
     return Object.keys(onlineCounter)
@@ -30,7 +31,8 @@ const chatroomSocket = (io) => {
                 user: socket.id,
                 user_ip: socket.handshake.address,
                 msg: parseMsg,
-                received_time: Date.now()
+                received_time: Date.now(),
+                user_color: getColor({ text: socket.id })
             };
             console.log(log);
             io.emit('chat', log);

@@ -24,9 +24,9 @@ class ChatList extends Component {
         return (
             <ul className="chatlist" onScroll={scrollHandler}>
                 {records.map( (record, i) => {
-                    let { user, monitor, msg } = record;
+                    let { user, monitor, msg, user_color } = record;
                     return (
-                        <Chat key={i} user={user} monitor={monitor}>{msg}</Chat>
+                        <Chat key={i} user={user} monitor={monitor} userColor={user_color}>{msg}</Chat>
                     );
                 })}
             </ul>
