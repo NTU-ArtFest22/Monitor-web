@@ -122,18 +122,20 @@ html, body {
                     background-color: #555;
                     border-radius: 3px;
                     left: 1px;
+                    transition: background-color 0.2s ease-out;
                 }
                 .after {
                     position: absolute;
                     height: 0;
                     width: 0;
-                    right: 2px;
+                    right: 3px;
                     top: 0;
                     bottom: 0;
                     margin: auto 0;
-                    border-top: 8px solid transparent;
-                    border-bottom: 8px solid transparent;
-                    border-right: 8px solid #555;
+                    border-top: 7px solid transparent;
+                    border-bottom: 7px solid transparent;
+                    border-right: 9px solid #555;
+                    transition: border-right 0.2s ease-out;
                 }
                 .text {
                     position: absolute;
@@ -143,7 +145,16 @@ html, body {
                     margin-right: 0;
                     margin-left: -8px;
                     top: 4px;
-                    font-size: 14px;
+                    font-size: 12px;
+                }
+
+                &:hover {
+                    .before {
+                        background-color: #888;
+                    }
+                    .after {
+                        border-right: 9px solid #888;
+                    }
                 }
             }
         }

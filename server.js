@@ -82,8 +82,7 @@ function handleRender(req, res) {
                 src: "GLE9_LwzDjs"
             },
             {
-                src: "eH7hBiY9xkg",
-                player: null
+                src: "eH7hBiY9xkg"
             },
             {
                 src: "mx6t6E24SSM",

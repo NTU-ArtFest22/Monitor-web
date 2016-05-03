@@ -16,30 +16,6 @@ const stageSocket = (io) => {
                 });
             }
         });
-        // connection.on('up', () => {
-        //     console.log('up');
-        //     connection.sendUTF('up');
-        // });
-        //
-        // connection.on('down', () => {
-        //     console.log('down');
-        //     connection.sendUTF('down');
-        // });
-        //
-        // connection.on('left', () => {
-        //     console.log('left');
-        //     connection.sendUTF('left');
-        // });
-        //
-        // connection.on('right', () => {
-        //     console.log('right');
-        //     connection.sendUTF('right');
-        // });
-        //
-        // connection.on('interact', () => {
-        //     console.log('interact');
-        //     connection.sendUTF('interact');
-        // });
     });
 
     return io;
