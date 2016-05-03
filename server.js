@@ -1,14 +1,24 @@
 import Express from 'express';
-import { Server } from 'http';
-
-const app = new Express();
-const server = Server(app);
-const stageServer = Server(new Express());
+import { Server, createServer } from 'http';
+import { server as WebSocketServer} from 'websocket';
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
 const DEV_PORT = process.env.PORT || 8081;
 const STAGE_PORT = process.env.STAGE_PORT || 9000;
+
+const app = new Express();
+const server = Server(app);
+const wsServer = createServer(response => {
+    response.writeHead(404);
+    response.end();
+});
+wsServer.listen(STAGE_PORT);
+
+const stageServer = new WebSocketServer({
+    httpServer: wsServer,
+    autoAcceptConnection: true
+});
 
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -26,9 +36,9 @@ import ios from 'socket.io';
 import chatroomSocket from './socket/chatroom';
 import stageSocket from './socket/stage';
 let io = ios(server);
-let stageIo = ios(stageServer);
 io = chatroomSocket(io);
-stageIo = stageSocket(stageIo);
+
+const stageIo = stageSocket(stageServer);
 
 app.use(Express.static('public'));
 
@@ -136,4 +146,3 @@ function renderFullPage(html, styles, initialState) {
 app.use(handleRender);
 
 server.listen(PORT);
-stageServer.listen(STAGE_PORT);

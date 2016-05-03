@@ -1,42 +1,48 @@
 const stageSocket = (io) => {
-    io.onlineCounter = {};
+    const connections = [];
 
-    io.on('connection', (socket) => {
+    io.on('request', (request) => {
         console.log('connected to stage');
 
-        socket.on('up', () => {
-            console.log('up');
-            io.emit('echo', 'up');
-            io.emit('control', 'up');
-        });
+        const connection = request.accept(null, request.origin);
+        connections.push(connection);
+        connection.sendUTF('connected');
 
-        socket.on('down', () => {
-            console.log('down');
-            io.emit('echo', 'down');
-            io.emit('control', 'down');
+        connection.on('message', (message) => {
+            if (message.type === 'utf8') {
+                console.log('Received Message: ' + message.utf8Data);
+                connections.forEach(conn => {
+                    conn.sendUTF('client-' + message.utf8Data);
+                });
+            }
         });
-
-        socket.on('left', () => {
-            console.log('left');
-            io.emit('echo', 'left');
-            io.emit('control', 'left');
-        });
-
-        socket.on('right', () => {
-            console.log('right');
-            io.emit('echo', 'right');
-            io.emit('control', 'right');
-        });
-
-        socket.on('interact', () => {
-            console.log('interact');
-            io.emit('echo', 'interact');
-            io.emit('control', 'interact');
-        });
+        // connection.on('up', () => {
+        //     console.log('up');
+        //     connection.sendUTF('up');
+        // });
+        //
+        // connection.on('down', () => {
+        //     console.log('down');
+        //     connection.sendUTF('down');
+        // });
+        //
+        // connection.on('left', () => {
+        //     console.log('left');
+        //     connection.sendUTF('left');
+        // });
+        //
+        // connection.on('right', () => {
+        //     console.log('right');
+        //     connection.sendUTF('right');
+        // });
+        //
+        // connection.on('interact', () => {
+        //     console.log('interact');
+        //     connection.sendUTF('interact');
+        // });
     });
 
     return io;
-
 };
 
 export default stageSocket;
