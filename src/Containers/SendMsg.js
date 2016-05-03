@@ -16,12 +16,23 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(sendMsg(input.value));
 
         input.value = "";
+    },
+
+    onKeyDown: (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            if (!input.value.trim()) return;
+
+            dispatch(sendMsg(input.value));
+
+            input.value = "";
+        }
     }
 });
 
-let SendMsg = ({ onSubmit, willScroll }) => (
+let SendMsg = ({ onSubmit, willScroll, onKeyDown }) => (
     <form className="send-msg-form" onSubmit={onSubmit}>
-        <textarea className="send-msg-input" placeholder="傳送訊息" type="text" ref={node => { input = node; }} />
+        <textarea className="send-msg-input" placeholder="傳送訊息" type="text" ref={node => { input = node; }} onKeyDown={onKeyDown} />
         <button className="send-msg-submit" type="submit">送出訊息</button>
         {willScroll ? '' : (<div className="new-msg-hint">new</div>)}
     </form>

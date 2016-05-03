@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import video from '../Components/Video';
-import { setPlayer, sendControlMsg } from '../Actions/Videos';
+import { setPlayer, sendControlMsg, controlLeft, controlRight } from '../Actions/Videos';
 
 const mapStateToProps = (state, ownProps) => ({
     src: state.players[state.monitor - 1].src,
@@ -13,6 +13,12 @@ const mapDispatchToProps = (dispatch) => ({
     },
     sendControlMsg: (msg, monitor) => {
         dispatch(sendControlMsg(msg, monitor));
+    },
+    controlLeft: (monitor) => {
+        dispatch(controlLeft(monitor));
+    },
+    controlRight: (monitor) => {
+        dispatch(controlRight(monitor));
     }
 });
 

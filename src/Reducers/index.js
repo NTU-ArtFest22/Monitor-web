@@ -49,6 +49,13 @@ const App = handleActions({
 
     SEND_CONTROL_MSG: (state) => ({
         ...state
+    }),
+
+    CONTROL_LEFT: (state) => ({
+        ...state
+    }),
+    CONTROL_RIGHT: (state) => ({
+        ...state
     })
 }, {
     onlineCounter: 0,
