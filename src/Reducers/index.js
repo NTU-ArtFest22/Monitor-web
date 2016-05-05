@@ -47,16 +47,10 @@ const App = handleActions({
         showChat: !state.showChat
     }),
 
-    SEND_CONTROL_MSG: (state) => ({
-        ...state
-    }),
-
-    CONTROL_LEFT: (state) => ({
-        ...state
-    }),
-    CONTROL_RIGHT: (state) => ({
-        ...state
-    })
+    CONTROL_LEFT: state => state,
+    CONTROL_RIGHT: state => state,
+    STOP_CONTROL: state => state,
+    CONTROL_INTERACT: state => state
 }, {
     onlineCounter: 0,
     socket: {},

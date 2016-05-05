@@ -1,37 +1,51 @@
 import { createAction } from 'redux-actions';
 import mqtt from 'mqtt';
 
-const client = mqtt.connect('mqtt://guest:NTUARTNJP@140.112.91.176:9001');
+const client = mqtt.connect('mqtt://guest:NTUARTNJP@140.112.91.176:9001/');
+let clientId = "";
 
 client.on('connect', () => {
     console.log('connected to mqtt');
+    clientId = client.options.clientId;
     client.subscribe('robot123');
-    client.publish('robot123', JSON.stringify({
-        "target": "baseServo",
-        "angle": 15
-    }));
 });
 
 client.on('message', (topic, message) => {
-    console.log(message.toString());
+    console.log(topic, message.toString());
 });
 
 export const setPlayer = createAction('SET_PLAYER');
 
-export const sendControlMsg = createAction('SEND_CONTROL_MSG', (msg, monitor) => {
-    client.publish('topic', JSON.stringify(msg));
-});
-
 export const controlLeft = createAction('CONTROL_LEFT', (monitor) => {
     client.publish('robot123', JSON.stringify({
+        "uid": clientId,
         "target": "baseServo",
-        "angle": 15
+        "rotate": "start",
+        "dir": "counterClockwise"
     }));
 });
 
 export const controlRight = createAction('CONTROL_RIGHT', (monitor) => {
     client.publish('robot123', JSON.stringify({
+        "uid": clientId,
         "target": "baseServo",
-        "angle": -15
+        "rotate": "start",
+        "dir": "clockwise"
+    }));
+});
+
+
+export const stopControl = createAction('STOP_CONTROL', (monitor) => {
+    client.publish('robot123', JSON.stringify({
+        "uid": clientId,
+        "target": "baseServo",
+        "rotate": "stop"
+    }));
+});
+
+export const controlInteract = createAction('CONTROL_INTERACT', (monitor) => {
+    client.publish('robot123', JSON.stringify({
+        "uid": clientId,
+        "target": "clapper"
     }));
 });

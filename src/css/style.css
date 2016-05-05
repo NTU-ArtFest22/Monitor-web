@@ -281,17 +281,76 @@ html, body {
         margin: 0 auto;
         text-align: center;
 
+        $arrow-color: #FFC107;
+        $arrow-hover-color: #FFF8E1;
+        $border-width: 5px;
+
         .left, .right {
-            background-color: #FFF;
+            border: $border-width solid $arrow-color;
             width: 100px;
             height: 50px;
             display: inline-block;
+            position: relative;
+            cursor: pointer;
+            transition: border-color 0.2s ease-out;
+
+            &:hover {
+                border-color: $arrow-hover-color;
+
+                &:before {
+                    background-color: $arrow-hover-color;
+                }
+                &:after {
+                    border-color: $arrow-hover-color;
+                }
+            }
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                height: $border-width;
+                width: 30px;
+                background-color: $arrow-color;
+                transition: background-color 0.2s ease-out;
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                height: 20px;
+                width: 20px;
+                border-left: $border-width solid $arrow-color;
+                border-top: $border-width solid $arrow-color;
+                transform-origin: center center;
+                transition: border-color 0.2s ease-out;
+            }
         }
         .left {
             margin-right: 50px;
+
+            &:after {
+                transform: translateX(-15px) rotate(-45deg);
+            }
         }
         .right {
             margin-left: 50px;
+
+            &:after {
+                transform: translateX(-10px) rotate(135deg);
+            }
+        }
+
+        .interact {
+            background-color: red;
+            height: 50px;
+            width: 50px;
         }
     }
 }

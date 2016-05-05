@@ -50,8 +50,9 @@ class Video extends React.Component {
                 <Youtube videoId={src} className="player" id={`monitor${monitor}`} opts={opts} onReady={this._onReady.bind(this)} />
                 <div className="playerBlocker" onClick={this.togglePlay.bind(this)}></div>
                 <div className="control-group">
-                    <div className="left" onClick={() => this.props.controlLeft()}></div>
-                    <div className="right" onClick={() => this.props.controlRight()}></div>
+                    <div className="left" onMouseDown={() => this.props.controlLeft()} onMouseUp={this.props.stopControl}></div>
+                    <div className="right" onMouseDown={() => this.props.controlRight()} onMouseUp={this.props.stopControl}></div>
+                    <div className="interact" onClick={this.props.controlInteract}></div>
                 </div>
             </div>
         );

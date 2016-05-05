@@ -15,6 +15,7 @@ import { w3cwebsocket as W3cWebSocket } from 'websocket';
 
 import { counterChanged } from './Actions/Socket';
 import { switchMonitor } from './Actions/Monitors';
+import { controlLeft, controlRight, stopControl } from './Actions/Videos';
 
 const middlewares = [promiseMiddleware];
 
@@ -56,6 +57,15 @@ stageSocket.onmessage = (e) => {
     }
     else if (e.data === "client-down") {
         store.dispatch(switchMonitor(cur < len - 1 ? cur + 1 : 0));
+    }
+    else if (e.data === "client-left") {
+        store.dispatch(controlLeft(store.getState().monitor));
+    }
+    else if (e.data === "client-right") {
+        store.dispatch(controlRight(store.getState().monitor));
+    }
+    else if (e.data === "client-stop") {
+        store.dispatch(stopControl(store.getState().monitor));
     }
 };
 
