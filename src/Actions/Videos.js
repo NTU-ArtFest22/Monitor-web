@@ -16,6 +16,9 @@ client.on('message', (topic, message) => {
 
 export const setPlayer = createAction('SET_PLAYER');
 
+export const controlUp = createAction('CONTROL_UP');
+export const controlDown = createAction('CONTROL_DOWN');
+
 export const controlLeft = createAction('CONTROL_LEFT', (monitor) => {
     client.publish('robot123', JSON.stringify({
         "uid": clientId,

@@ -10,11 +10,13 @@ const App = ({ showChat, toggleShowChat }) => (
     <div>
         <div className={classNames('body', { 'showChat': showChat })}>
             <Video />
+            <div className="before"></div>
             <Monitors />
+            <div className="after"></div>
         </div>
         <div className={classNames('chatroom', { 'showChat': showChat })}>
             <a className="toggleShowChat" onClick={toggleShowChat}>
-                <div className="after"></div>
+                <i className="material-icons">keyboard_arrow_left</i>
             </a>
             <ChatList />
             <SendMsg />

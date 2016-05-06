@@ -33,6 +33,8 @@ import App from './src/Components/App.js';
 
 import ios from 'socket.io';
 
+import { OrderedMap } from 'immutable';
+
 import chatroomSocket from './socket/chatroom';
 import stageSocket from './socket/stage';
 let io = ios(server);
@@ -102,7 +104,7 @@ function handleRender(req, res) {
             }
         ],
         showChat: true,
-        records: [],
+        records: OrderedMap(),
         willScroll: true
     };
 
@@ -130,6 +132,8 @@ function renderFullPage(html, styles, initialState) {
         <html>
         <head>
             <title>Socket.IO chat</title>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
             <style type="text/css">${styles}</style>
         </head>
         <body>

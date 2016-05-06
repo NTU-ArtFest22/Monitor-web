@@ -1,8 +1,18 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+$arrow-color: rgba(255, 193, 6, 0.3);
+$arrow-hover-color: rgba(255, 193, 6, 1);
+$border-width: 5px;
+
 html, body {
     padding: 0;
     margin: 0;
     background-color: white;
     overflow: hidden;
+}
+
+* {
+    font-family: 'Roboto';
 }
 
 #root {
@@ -26,6 +36,45 @@ html, body {
     &.showChat {
         width: calc(100vw - 340px);
     }
+
+    > .before, > .after {
+        content: '';
+        position: absolute;
+        height: 30px;
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 208px;
+        right: 0;
+        display: block;
+        z-index: 10;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            height: 0;
+            width: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+        }
+    }
+    > .before {
+        top: 0;
+
+        &:after {
+            border-bottom: 8px solid rgba(255, 255, 255, 0.7);
+        }
+    }
+    > .after {
+        bottom: 0;
+
+        &:after {
+            border-top: 8px solid rgba(255, 255, 255, 0.7);
+        }
+    }
 }
 
 .chatroom {
@@ -36,7 +85,6 @@ html, body {
     width: 340px;
     box-sizing: border-box;
     padding: 40px 20px;
-    border: 1px solid #555;
     transition: right 0.5s ease-out;
 
     &.showChat {
@@ -45,8 +93,8 @@ html, body {
         .toggleShowChat {
             left: 0;
 
-            .after {
-                transform: translateX(-20%) rotate(135deg);
+            i {
+                transform: rotate(180deg);
             }
         }
     }
@@ -58,23 +106,13 @@ html, body {
         width: 25px;
         height: 25px;
         background-color: #FFF;
-        border: 1px solid #555;
+        border: 2px solid #555;
         transition: left 0.5s ease-out;
         cursor: pointer;
+        z-index: 15;
 
-        .after {
-            position: absolute;
-            height: 10px;
-            width: 10px;
-            border-left: 1px solid #555;
-            border-right: 0;
-            border-top: 1px solid #555;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
-            transform: translateX(20%) rotate(-45deg);
+        i {
+            color: #555;
             transition: transform 0.5s ease-out;
         }
     }
@@ -98,54 +136,69 @@ html, body {
             list-style-position: unset;
             overflow: hidden;
             word-wrap: break-word;
-            display: flex;
-            height: 30px;
+            display: block;
+            flex-wrap: wrap;
+            min-height: 30px;
             align-items: center;
+
+            &.inActive, &.inActive > span {
+                color: #CCC !important;
+
+                .chat-monitor {
+                    i {
+                        color: #CCC;
+                    }
+                    .text {
+                        color: #FFF;
+                    }
+                }
+            }
+
+            .send-time {
+                position: absolute;
+                right: 3px;
+                line-height: 30px;
+                font-size: 12px;
+                color: #AAA;
+                opacity: 0;
+                transition: opacity 0.2s ease-out, background-color 0.2s ease-out;
+            }
+            &:hover {
+                .send-time {
+                    opacity: 1;
+                    background-color: rgba(255, 255, 255, 0.9);
+                }
+            }
 
             .chat-monitor {
                 text-decoration: none;
-                color: #FFF;
+                color: #555;
                 display: inline-block;
-                height: 30px;
+                height: 21px;
                 width: 30px;
-                text-align: center;
                 position: relative;
                 margin-right: 3px;
 
-                .before {
+                i {
+                    color: #555;
+                    font-size: 30px;
+                    cursor: pointer;
                     position: absolute;
-                    height: 17px;
-                    width: 20px;
+                    left: 0;
                     top: 0;
-                    bottom: 0;
-                    margin: auto 0;
-                    background-color: #555;
-                    border-radius: 3px;
-                    left: 1px;
-                    transition: background-color 0.2s ease-out;
                 }
-                .after {
-                    position: absolute;
-                    height: 0;
-                    width: 0;
-                    right: 3px;
-                    top: 0;
-                    bottom: 0;
-                    margin: auto 0;
-                    border-top: 7px solid transparent;
-                    border-bottom: 7px solid transparent;
-                    border-right: 9px solid #555;
-                    transition: border-right 0.2s ease-out;
-                }
+
                 .text {
                     position: absolute;
                     left: 0;
                     right: 0;
                     margin-left: 0;
                     margin-right: 0;
-                    margin-left: -8px;
-                    top: 4px;
+                    margin-left: -5px;
+                    text-align: center;
+                    top: 2px;
                     font-size: 12px;
+                    color: #FFF;
                 }
 
                 &:hover {
@@ -156,6 +209,10 @@ html, body {
                         border-right: 9px solid #888;
                     }
                 }
+            }
+
+            .user, .content {
+                line-height: 30px;
             }
         }
     }
@@ -208,7 +265,7 @@ html, body {
 }
 
 .monitors {
-    display: flex;
+    display: block;
     flex-direction: column;
     align-items: flex-end;
     background-color: #000;
@@ -217,6 +274,8 @@ html, body {
     width: 208px;
     align-self: flex-end;
     overflow: scroll;
+    padding: 30px 0;
+    box-sizing: border-box;
 }
 
 .monitor {
@@ -224,31 +283,54 @@ html, body {
     width: 208px;
     float: right;
     display: block;
+    justify-content: center;
+    align-items: center;
     position: relative;
     cursor: pointer;
+    padding: 10px;
+    box-sizing: border-box;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 5px solid $arrow-color;
+    box-sizing: border-box;
+    transition: background-size 0.2s ease-out, border-color 0.2s ease-out;
+    overflow: hidden;
 
-    img {
-        width: 100%;
+    &:hover, &.active {
+        background-size: 110%;
+        border-color: $arrow-hover-color;
+
+        span {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
     }
 
-    p {
+    span {
         position: absolute;
         z-index: 10;
-        top: 0;
-        left: 0;
+        top: 0px;
         margin: 0;
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.5);
         color: #FFF;
         padding: 5px 10px;
-    }
+        font-size: 14px;
+        line-height: 16px;
+        display: flex;
+        transition: background-color 0.2s ease-out;
 
-    &.active {
-        width: 640px;
-        height: 360px;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin: auto 0;
+        i {
+            font-size: 16px;
+            margin-right: 3px;
+        }
+
+        &.monitor-id {
+            left: 0;
+        }
+
+        &.online-counter {
+            right: 0;
+        }
     }
 }
 
@@ -281,16 +363,16 @@ html, body {
         margin: 0 auto;
         text-align: center;
 
-        $arrow-color: #FFC107;
-        $arrow-hover-color: #FFF8E1;
-        $border-width: 5px;
-
         .left, .right {
             border: $border-width solid $arrow-color;
             width: 100px;
             height: 50px;
             display: inline-block;
-            position: relative;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            box-sizing: border-box;
             cursor: pointer;
             transition: border-color 0.2s ease-out;
 
@@ -333,14 +415,14 @@ html, body {
             }
         }
         .left {
-            margin-right: 50px;
+            left: 5%;
 
             &:after {
                 transform: translateX(-15px) rotate(-45deg);
             }
         }
         .right {
-            margin-left: 50px;
+            right: 5%;
 
             &:after {
                 transform: translateX(-10px) rotate(135deg);
@@ -348,9 +430,27 @@ html, body {
         }
 
         .interact {
-            background-color: red;
             height: 50px;
-            width: 50px;
+            width: 120px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            transition: border-color 0.2s ease-out, color 0.2s ease-out;
+            border: $border-width solid $arrow-color;
+            color: $arrow-color;
+            text-align: center;
+            line-height: 50px;
+            font-size: 30px;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+
+            &:hover {
+                border-color: $arrow-hover-color;
+                color: $arrow-hover-color;
+            }
         }
     }
 }

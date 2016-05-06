@@ -4,34 +4,50 @@ import classNames from 'classnames';
 
 import Chat from '../Containers/Chat';
 
-class ChatList extends Component {
+const ChatList = React.createClass({
     componentDidMount() {
-        let { socket, addMsgToList, setWillScroll } = this.props;
+        const { fireRef, setMsgToList, addMsgToList, removeMsgFromList, changeMsg, setWillScroll, saveUid } = this.props;
         const dom = findDOMNode(this);
 
-        socket.on('chat', (data) => {
-            let willScroll = dom.scrollTop + dom.clientHeight >= dom.scrollHeight;
-            setWillScroll(willScroll);
-            addMsgToList(data);
-            if (willScroll)
-                dom.scrollTop = dom.scrollHeight - dom.clientHeight;
+        fireRef.limitToLast(15).once("value", (snapShot, prevChildKey) => {
+            setMsgToList(snapShot.val());
+            dom.scrollTop = dom.scrollHeight - dom.clientHeight;
         });
-    }
+
+        fireRef.orderByChild('send_time').startAt(Date.now()).on("child_added", snapShot => {
+            const willScroll = dom.scrollTop + dom.clientHeight >= dom.scrollHeight;
+            setWillScroll(willScroll);
+            addMsgToList(snapShot.key(), snapShot.val(), dom, willScroll);
+        });
+
+        fireRef.on("child_removed", snapShot => {
+            setTimeout(() => {
+                removeMsgFromList(snapShot.key());
+            }, 0);
+        });
+
+        fireRef.on("child_changed", snapShot => {
+            setTimeout(() => {
+                changeMsg(snapShot.key());
+            }, 0);
+        });
+    },
 
     render() {
-        let { records, willScroll, scrollHandler, showChat } = this.props;
+        let { records, willScroll, scrollHandler } = this.props;
+        const dom = findDOMNode(this);
 
         return (
             <ul className="chatlist" onScroll={scrollHandler}>
-                {records.map( (record, i) => {
-                    let { user, monitor, msg, user_color } = record;
+                {records.map( (record, id) => {
+                    let { user, monitor, msg, user_color, send_time, inActive } = record;
                     return (
-                        <Chat key={i} user={user} monitor={monitor} userColor={user_color}>{msg}</Chat>
+                        <Chat key={id} parent={dom} user={user} monitor={monitor} userColor={user_color} sendTime={send_time} inActive={inActive}>{msg}</Chat>
                     );
                 })}
             </ul>
         );
     }
-}
+});
 
 export default ChatList;

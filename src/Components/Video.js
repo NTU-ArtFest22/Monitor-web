@@ -52,7 +52,7 @@ class Video extends React.Component {
                 <div className="control-group">
                     <div className="left" onMouseDown={() => this.props.controlLeft()} onMouseUp={this.props.stopControl}></div>
                     <div className="right" onMouseDown={() => this.props.controlRight()} onMouseUp={this.props.stopControl}></div>
-                    <div className="interact" onClick={this.props.controlInteract}></div>
+                    <div className="interact" onClick={this.props.controlInteract}>HIT!</div>
                 </div>
             </div>
         );

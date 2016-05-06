@@ -1,11 +1,29 @@
 import { createAction } from 'redux-actions';
+import Firebase from 'firebase';
+import { getColor } from 'random-material-color';
 
-export const sendMsg = createAction('SEND_MSG', msg => ({
-    msg,
-    send_time: Date.now()
+const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
+
+export const configureFirebase = createAction('CONFIGURE_FIREBASE');
+export const saveUid = createAction('SAVE_UID');
+
+export const sendMsg = createAction('SEND_MSG', data => {
+    fireRef.push({
+        ...data,
+        user_color: getColor({ text: data.user }),
+        send_time: Date.now()
+    });
+    return data;
+});
+
+export const setMsgToList = createAction('SET_MSG_TO_LIST');
+
+export const addMsgToList = createAction('ADD_MSG_TO_LIST', (key, value) => ({
+    key, value
 }));
 
-export const addMsgToList = createAction('ADD_MSG_TO_LIST');
+export const removeMsgFromList = createAction('REMOVE_MSG_FROM_LIST');
+
 export const setWillScroll = createAction('SET_WILL_SCROLL');
 
 export const toggleShowChat = createAction('TOGGLE_SHOW_CHAT');

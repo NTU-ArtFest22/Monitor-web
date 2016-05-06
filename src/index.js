@@ -10,14 +10,18 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import createLogger from 'redux-logger';
 
+import Firebase from 'firebase';
+import { OrderedMap } from 'immutable';
 import io from 'socket.io-client';
 import { w3cwebsocket as W3cWebSocket } from 'websocket';
 
+import { configureFirebase, addMsgToList, saveUid, setMsgToList, setWillScroll } from './Actions/ChatList';
 import { counterChanged } from './Actions/Socket';
 import { switchMonitor } from './Actions/Monitors';
-import { controlLeft, controlRight, stopControl } from './Actions/Videos';
+import { controlUp, controlDown, controlLeft, controlRight, stopControl } from './Actions/Videos';
 
 const middlewares = [promiseMiddleware];
+
 
 if (process.env.NODE_ENV === 'development') {
     const logger = createLogger({
@@ -36,6 +40,7 @@ socket.on('connect', () => {
 const stageSocket = new W3cWebSocket('ws://localhost:9000', null);
 
 initialState.socket = initialState.socket || socket;
+initialState.records = OrderedMap();
 
 let store = createStore(ChatroomApp, initialState,
     compose(
@@ -53,21 +58,45 @@ stageSocket.onmessage = (e) => {
     const len = store.getState().players.length;
 
     if (e.data === "client-up") {
-        store.dispatch(switchMonitor(cur > 0 ? cur - 1 : len - 1));
+        store.dispatch(controlUp());
+        store.dispatch(switchMonitor(cur > 1 ? cur - 1 : len));
     }
     else if (e.data === "client-down") {
-        store.dispatch(switchMonitor(cur < len - 1 ? cur + 1 : 0));
+        store.dispatch(controlDown());
+        store.dispatch(switchMonitor(cur < len ? cur + 1 : 1));
     }
     else if (e.data === "client-left") {
-        store.dispatch(controlLeft(store.getState().monitor));
+        store.dispatch(controlLeft(cur));
     }
     else if (e.data === "client-right") {
-        store.dispatch(controlRight(store.getState().monitor));
+        store.dispatch(controlRight(cur));
     }
     else if (e.data === "client-stop") {
-        store.dispatch(stopControl(store.getState().monitor));
+        store.dispatch(stopControl(cur));
     }
 };
+
+const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
+
+store.dispatch(configureFirebase(fireRef));
+
+fireRef.authAnonymously((error, authData) => {
+    if (error) {
+        console.log(error);
+    }
+    else {
+        store.dispatch(saveUid(authData.uid));
+    }
+});
+
+// fireRef.limitToLast(15).once("value", (snapShot, prevChildKey) => {
+//     store.dispatch(setMsgToList(snapShot.val()));
+//     store.dispatch(setWillScroll(true));
+// });
+//
+// fireRef.orderByChild('send_time').startAt(Date.now()).on("child_added", snapShot => {
+//     store.dispatch(addMsgToList(snapShot.key(), snapShot.val()));
+// });
 
 render(
     <Provider store={store}>

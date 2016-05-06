@@ -1,18 +1,28 @@
 import ChatList from '../Components/ChatList';
-import { addMsgToList, setWillScroll } from '../Actions/ChatList';
+import { saveUid, setMsgToList, addMsgToList, removeMsgFromList, setWillScroll } from '../Actions/ChatList';
 import { findDOMNode } from 'react-dom';
 
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
+    fireRef: state.fireRef,
     socket: state.socket,
     records: state.records,
     willScroll: state.willScroll
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    addMsgToList: (data) => {
-        dispatch(addMsgToList(data));
+    setMsgToList: (msg) => {
+        dispatch(setMsgToList(msg));
+    },
+    addMsgToList: (key, value, dom, willScroll) => {
+        dispatch(addMsgToList(key, value));
+        if (willScroll) {
+            dom.scrollTop = dom.scrollHeight - dom.clientHeight;
+        }
+    },
+    removeMsgFromList: (key) => {
+        dispatch(removeMsgFromList(key));
     },
     setWillScroll: (willScroll) => {
         dispatch(setWillScroll(willScroll));
@@ -20,6 +30,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     scrollHandler: (event) => {
         const dom = event.target;
         dispatch(setWillScroll(dom.scrollTop + dom.clientHeight >= dom.scrollHeight));
+    },
+    saveUid: (uid) => {
+        dispatch(saveUid(uid));
     }
 });
 
