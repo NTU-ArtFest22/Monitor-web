@@ -18,12 +18,10 @@ const App = handleActions({
         records: OrderedMap(action.payload).map(record => ({ ...record, inActive: true }))
     }),
 
-    ADD_MSG_TO_LIST: (state, action) => {
-        return {
-            ...state,
-            records: state.records.set(action.payload.key, action.payload.value)
-        };
-    },
+    ADD_MSG_TO_LIST: (state, action) => ({
+        ...state,
+        records: state.records.set(action.payload.key, action.payload.value)
+    }),
 
     REMOVE_MSG_FROM_LIST: (state, action) => ({
         ...state,

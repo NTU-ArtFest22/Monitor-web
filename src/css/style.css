@@ -105,11 +105,16 @@ html, body {
         left: -28px;
         width: 25px;
         height: 25px;
-        background-color: #FFF;
+        background-color: rgba(255, 255, 255, 0.5);
         border: 2px solid #555;
         transition: left 0.5s ease-out;
         cursor: pointer;
         z-index: 15;
+        transition: background-color 0.2s ease-out;
+
+        &:hover {
+            background-color: #FFF;
+        }
 
         i {
             color: #555;

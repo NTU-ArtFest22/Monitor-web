@@ -21,15 +21,11 @@ const ChatList = React.createClass({
         });
 
         fireRef.on("child_removed", snapShot => {
-            setTimeout(() => {
-                removeMsgFromList(snapShot.key());
-            }, 0);
+            removeMsgFromList(snapShot.key());
         });
 
         fireRef.on("child_changed", snapShot => {
-            setTimeout(() => {
-                changeMsg(snapShot.key());
-            }, 0);
+            changeMsg(snapShot.key(), snapShot.val());
         });
     },
 
