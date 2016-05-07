@@ -3,6 +3,8 @@ import Firebase from 'firebase';
 import { getColor } from 'random-material-color';
 import { OrderedMap } from 'immutable';
 
+const counterRef = new Firebase('https://monitor-web.firebaseio.com/counter');
+
 const App = handleActions({
     CONFIGURE_FIREBASE: (state, action) => ({
         ...state,
@@ -34,7 +36,10 @@ const App = handleActions({
     }),
 
     SWITCH_MONITOR: (state, action) => {
-        state.socket.emit('user_connected', action.payload);
+        // state.socket.emit('user_connected', action.payload);
+        counterRef.child(state.monitor.toString()).transaction(cur => (cur || 1) - 1);
+        counterRef.child(action.payload.toString()).transaction(cur => (cur || 0) + 1);
+
         return {
             ...state,
             monitor: action.payload

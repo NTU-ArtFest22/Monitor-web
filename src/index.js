@@ -34,7 +34,7 @@ const initialState = window.__INITIAL_STATE__;
 
 const socket = io();
 socket.on('connect', () => {
-    socket.emit('user_connected', initialState.monitor || 1);
+    // socket.emit('user_connected', initialState.monitor || 1);
 });
 
 const stageSocket = new W3cWebSocket('ws://localhost:9000', null);
@@ -50,7 +50,7 @@ let store = createStore(ChatroomApp, initialState,
 );
 
 socket.on('counter_changed', (onlineCounter) => {
-    store.dispatch(counterChanged(onlineCounter));
+    // store.dispatch(counterChanged(onlineCounter));
 });
 
 stageSocket.onmessage = (e) => {
@@ -77,6 +77,7 @@ stageSocket.onmessage = (e) => {
 };
 
 const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
+const counterRef = new Firebase('https://monitor-web.firebaseio.com/counter');
 
 store.dispatch(configureFirebase(fireRef));
 
@@ -87,6 +88,13 @@ fireRef.authAnonymously((error, authData) => {
     else {
         store.dispatch(saveUid(authData.uid));
     }
+});
+
+// counterRef.onDisconnect().transaction(cur => (cur || 1) - 1);
+
+counterRef.on('value', counters => {
+    console.log(counters.val());
+    store.dispatch(counterChanged(counters.val() || []));
 });
 
 render(
