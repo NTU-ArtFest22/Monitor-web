@@ -2,10 +2,10 @@ import React from 'react';
 
 import Monitor from '../Containers/Monitor';
 
-const Monitors = ({ players, switchMonitor }) => (
+const Monitors = ({ players, curMonitor }) => (
     <div className="monitors">
         {players.map(player => player.src).map( (src, i) => (
-            <Monitor key={`monitor${i + 1}`} monitor={i + 1} src={src} switchMonitor={switchMonitor.bind(null, i + 1)} />
+            <Monitor key={`monitor${i + 1}`} curMonitor={curMonitor} monitor={i + 1} src={src} />
         ))}
     </div>
 );

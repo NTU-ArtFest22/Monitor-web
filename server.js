@@ -20,16 +20,19 @@ const stageServer = new WebSocketServer({
     autoAcceptConnection: true
 });
 
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
 import createLogger from 'redux-logger';
+import { Router, Route, browserHistory, hashHistory } from 'react-router';
+// import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
 import ChatroomApp from './src/Reducers';
-import App from './src/Components/App.js';
+import App from './src/Containers/App';
+import ChatList from './src/Containers/ChatList';
 
 import ios from 'socket.io';
 
@@ -64,7 +67,7 @@ function handleRender(req, res) {
         }, {});
 
     let initialState = {
-        onlineCounter,
+        onlineCounter: [],
         monitor: 1,
         player: null,
         players: [
@@ -105,14 +108,19 @@ function handleRender(req, res) {
         ],
         showChat: true,
         records: OrderedMap(),
-        willScroll: true
+        willScroll: true,
+        routing: null
     };
 
-    const store = createStore(ChatroomApp, initialState,
+    const store = createStore(
+        ChatroomApp,
+        initialState,
         compose(
             applyMiddleware(...middlewares)
         )
     );
+
+    // const history = syncHistoryWithStore(browserHistory, store);
 
     const html = renderToString(
         <Provider store={store}>

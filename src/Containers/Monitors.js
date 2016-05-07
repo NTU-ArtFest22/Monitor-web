@@ -3,15 +3,10 @@ import monitors from '../Components/Monitors';
 import { switchMonitor } from '../Actions/Monitors';
 
 const mapStateToProps = (state) => ({
-    players: state.players
+    players: state.players,
+    curMonitor: state.monitor
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    switchMonitor: (monitor) => {
-        dispatch(switchMonitor(monitor));
-    }
-});
-
-const Monitors = connect(mapStateToProps, mapDispatchToProps)(monitors);
+const Monitors = connect(mapStateToProps)(monitors);
 
 export default Monitors;

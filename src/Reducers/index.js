@@ -1,9 +1,6 @@
 import { handleActions } from 'redux-actions';
-import Firebase from 'firebase';
 import { getColor } from 'random-material-color';
 import { OrderedMap } from 'immutable';
-
-const counterRef = new Firebase('https://monitor-web.firebaseio.com/counter');
 
 const App = handleActions({
     CONFIGURE_FIREBASE: (state, action) => ({
@@ -37,8 +34,6 @@ const App = handleActions({
 
     SWITCH_MONITOR: (state, action) => {
         // state.socket.emit('user_connected', action.payload);
-        counterRef.child(state.monitor.toString()).transaction(cur => (cur || 1) - 1);
-        counterRef.child(action.payload.toString()).transaction(cur => (cur || 0) + 1);
 
         return {
             ...state,
@@ -48,7 +43,7 @@ const App = handleActions({
 
     COUNTER_CHANGED: (state, action) => ({
         ...state,
-        onlineCounter: action.payload
+        onlineCounter: action.payload.slice(1)
     }),
 
 
@@ -87,11 +82,14 @@ const App = handleActions({
         control: 'interact'
     })
 }, {
-    onlineCounter: 0,
-    socket: {},
+    onlineCounter: [],
     monitor: 1,
-    records: OrderedMap(),
-    willScroll: true
+    willScroll: true,
+    player: null,
+    players: [],
+    showChat: true,
+    records: [],
+    routing: null
 });
 
 export default App;

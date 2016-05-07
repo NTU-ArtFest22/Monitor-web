@@ -1,14 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './Containers/App';
+import ChatList from './Containers/ChatList';
 import style from './css/style.css';
 
 import ChatroomApp from './Reducers';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import createLogger from 'redux-logger';
+import { Router, Route, browserHistory, hashHistory } from 'react-router';
+// import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
 import Firebase from 'firebase';
 import { OrderedMap } from 'immutable';
@@ -42,7 +45,9 @@ const stageSocket = new W3cWebSocket('ws://localhost:9000', null);
 initialState.socket = initialState.socket || socket;
 initialState.records = OrderedMap();
 
-let store = createStore(ChatroomApp, initialState,
+const store = createStore(
+    ChatroomApp,
+    initialState,
     compose(
         applyMiddleware(...middlewares),
         window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -90,12 +95,20 @@ fireRef.authAnonymously((error, authData) => {
     }
 });
 
-// counterRef.onDisconnect().transaction(cur => (cur || 1) - 1);
+
+counterRef.child(store.getState().monitor).transaction(cur => (cur || 0) + 1);
+
+counterRef.on('value', (snap) => {
+    counterRef.onDisconnect().update({
+        [store.getState().monitor]: (snap.val()[store.getState().monitor] || 1) - 1
+    });
+});
 
 counterRef.on('value', counters => {
-    console.log(counters.val());
     store.dispatch(counterChanged(counters.val() || []));
 });
+
+// const history = syncHistoryWithStore(browserHistory, store);
 
 render(
     <Provider store={store}>

@@ -40,7 +40,7 @@ const ChatList = React.createClass({
                     return (
                         <Chat key={id} parent={this.state.dom} user={user} monitor={monitor} userColor={user_color} sendTime={send_time} inActive={inActive}>{msg}</Chat>
                     );
-                })}
+                }).toArray()}
             </ul>
         );
     }
