@@ -88,8 +88,7 @@ const App = handleActions({
     player: null,
     players: [],
     showChat: true,
-    records: [],
-    routing: null
+    records: []
 });
 
 export default App;

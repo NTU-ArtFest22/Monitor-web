@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './Containers/App';
+import Body from './Containers/Body';
 import ChatList from './Containers/ChatList';
 import style from './css/style.css';
 
@@ -10,8 +11,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import createLogger from 'redux-logger';
-import { Router, Route, browserHistory, hashHistory } from 'react-router';
-// import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { IndexRoute, Router, Route, browserHistory } from 'react-router';
 
 import Firebase from 'firebase';
 import { OrderedMap } from 'immutable';
@@ -112,7 +112,12 @@ counterRef.on('value', counters => {
 
 render(
     <Provider store={store}>
-        <App />
+        <Router history={browserHistory}>
+            <Route path="/" component={App}>
+                <IndexRoute component={Body} />
+                <Route path="chat" />
+            </Route>
+        </Router>
     </Provider>,
     document.getElementById('root')
 );

@@ -24,7 +24,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
 import createLogger from 'redux-logger';
-import { Router, Route, browserHistory, hashHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 // import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
 import React from 'react';
