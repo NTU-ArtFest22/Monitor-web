@@ -7,7 +7,7 @@ let clientId = "";
 client.on('connect', () => {
     console.log('connected to mqtt');
     clientId = client.options.clientId;
-    client.subscribe('robot003');
+    client.subscribe('robot3');
 });
 
 client.on('message', (topic, message) => {
@@ -20,7 +20,7 @@ export const controlUp = createAction('CONTROL_UP');
 export const controlDown = createAction('CONTROL_DOWN');
 
 export const controlLeft = createAction('CONTROL_LEFT', (monitor) => {
-    client.publish('robot003', JSON.stringify({
+    client.publish('robot3', JSON.stringify({
         "uid": clientId,
         "target": "baseServo",
         "rotate": "start",
@@ -29,7 +29,7 @@ export const controlLeft = createAction('CONTROL_LEFT', (monitor) => {
 });
 
 export const controlRight = createAction('CONTROL_RIGHT', (monitor) => {
-    client.publish('robot003', JSON.stringify({
+    client.publish('robot3', JSON.stringify({
         "uid": clientId,
         "target": "baseServo",
         "rotate": "start",
@@ -39,7 +39,7 @@ export const controlRight = createAction('CONTROL_RIGHT', (monitor) => {
 
 
 export const stopControl = createAction('STOP_CONTROL', (monitor) => {
-    client.publish('robot003', JSON.stringify({
+    client.publish('robot3', JSON.stringify({
         "uid": clientId,
         "target": "baseServo",
         "rotate": "stop"
@@ -47,7 +47,7 @@ export const stopControl = createAction('STOP_CONTROL', (monitor) => {
 });
 
 export const controlInteract = createAction('CONTROL_INTERACT', (monitor) => {
-    client.publish('robot003', JSON.stringify({
+    client.publish('robot3', JSON.stringify({
         "uid": clientId,
         "target": "clapper"
     }));
