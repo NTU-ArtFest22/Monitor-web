@@ -8,7 +8,8 @@
     "dev": "NODE_ENV=development babel-node webpack-dev-server.js",
     "build": "webpack",
     "watch": "babel-node webpack-dev-server.js",
-    "start": "NODE_ENV=production ./node_modules/.bin/babel-node app.js"
+    "start": "NODE_ENV=production forever start app.js",
+    "stop": "forever stopall"
   },
   "author": "Kai Hao",
   "license": "MIT",
@@ -20,6 +21,7 @@
     "eslint": "^2.8.0",
     "eslint-plugin-react": "^3.16.1",
     "expect": "^1.14.0",
+    "forever": "^0.15.1",
     "mocha": "^2.4.5",
     "proxy-middleware": "^0.15.0",
     "redux-devtools": "^3.1.1",

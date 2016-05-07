@@ -1,8 +1,9 @@
-import webpack from 'webpack';
-import config from './webpack-prod.config';
-import Webpack_isomorphic_tools from 'webpack-isomorphic-tools';
+require('babel-register');
+const webpack = require('webpack');
+const config = require('./webpack-prod.config');
+const Webpack_isomorphic_tools = require('webpack-isomorphic-tools');
 const project_base_path = __dirname;
-import configuration from './webpack-isomorphic-tools-configuration';
+const configuration = require('./webpack-isomorphic-tools-configuration').default;
 
 const compiler = webpack(config);
 

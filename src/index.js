@@ -89,15 +89,6 @@ fireRef.authAnonymously((error, authData) => {
     }
 });
 
-// fireRef.limitToLast(15).once("value", (snapShot, prevChildKey) => {
-//     store.dispatch(setMsgToList(snapShot.val()));
-//     store.dispatch(setWillScroll(true));
-// });
-//
-// fireRef.orderByChild('send_time').startAt(Date.now()).on("child_added", snapShot => {
-//     store.dispatch(addMsgToList(snapShot.key(), snapShot.val()));
-// });
-
 render(
     <Provider store={store}>
         <App />
