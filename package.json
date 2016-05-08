@@ -21,14 +21,16 @@
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
+    "build": "npm run deploy:prod && npm run build:server",
+    "build:server": "babel src/server.js --out-file dist/server.js",
     "server": "better-npm-run server",
     "stop": "forever stopall",
     "prod": "better-npm-run prod",
-    "push": "npm run deploy:prod && git subtree push --prefix dist origin gh-pages"
+    "push": "npm run deploy:prod && npm run build:server && git subtree push --prefix dist origin gh-pages"
   },
   "betterScripts": {
     "server": {
-      "command": "babel src/server.js --out-file dist/server.js && npm run stop && forever start dist/server.js",
+      "command": "npm run build:server && npm run stop && forever start dist/server.js",
       "env": {
         "NODE_ENV": "production",
         "BASENAME": ""
