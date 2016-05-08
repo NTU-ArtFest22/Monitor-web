@@ -11,14 +11,16 @@ Monitor web app side.
 clone this repo, then:
 ```sh
 npm install
-npm start # for development
+npm run prod # production build and start the server
 ```
-head to [http://localhost:3000](http://localhost:3000).
+head to [http://localhost:8080](http://localhost:8080).
 
 For other method:
 ```sh
+npm start # development server, listen on localhost:3000
 npm run server # compile and start the server
-npm run prod # production build and start the server
+npm run stop # stop all server
+npm run push # production build and push to gh-pages
 ```
 
 ### License

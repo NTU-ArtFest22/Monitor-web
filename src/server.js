@@ -1,6 +1,7 @@
 import Koa from 'koa';
+import convert from 'koa-convert'
 import serve from 'koa-static';
-import send from 'koa-send';
+import historyApiFallback from 'koa-connect-history-api-fallback';
 import { createServer } from 'http';
 import { server as WebSocketServer } from 'websocket';
 
@@ -48,12 +49,12 @@ console.log('websocket server listening on port ' + STAGE_PORT);
 // ==============================================
 const app = new Koa();
 
+app.use(convert(historyApiFallback({
+  verbose: false
+})));
+
+app.use(convert(serve(__dirname)));
+
 app.listen(PORT);
-
-app.use(serve(__dirname));
-
-app.use(function * () {
-  yield send(this, __dirname + '/index.html');
-});
 
 console.log('server listening on port ' + PORT);

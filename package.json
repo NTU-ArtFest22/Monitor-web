@@ -21,11 +21,19 @@
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "server": "babel src/server.js --out-file dist/server.js && npm run stop && forever start dist/server.js",
+    "server": "better-npm-run server",
     "stop": "forever stopall",
-    "prod": "better-npm-run prod"
+    "prod": "better-npm-run prod",
+    "push": "npm run deploy:prod && git subtree push --prefix dist origin gh-pages"
   },
   "betterScripts": {
+    "server": {
+      "command": "babel src/server.js --out-file dist/server.js && npm run stop && forever start dist/server.js",
+      "env": {
+        "NODE_ENV": "production",
+        "BASENAME": ""
+      }
+    },
     "prod": {
       "command": "npm run deploy:prod && npm run server",
       "env": {
@@ -116,7 +124,6 @@
     "koa-connect-history-api-fallback": "^0.3.0",
     "koa-convert": "^1.2.0",
     "koa-proxy": "^0.6.0",
-    "koa-send": "^3.2.0",
     "koa-static": "^2.0.0",
     "mqtt": "^1.10.0",
     "node-sass": "^3.7.0",
