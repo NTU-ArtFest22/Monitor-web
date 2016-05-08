@@ -21,7 +21,8 @@
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "server": "babel src/server.js --out-file dist/server.js && forever start dist/server.js",
+    "server": "babel src/server.js --out-file dist/server.js && npm run stop && forever start dist/server.js",
+    "stop": "forever stopall",
     "prod": "better-npm-run prod"
   },
   "betterScripts": {
