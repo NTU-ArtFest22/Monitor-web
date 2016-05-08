@@ -6,6 +6,7 @@ const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
 
 export const configureFirebase = createAction('CONFIGURE_FIREBASE');
 export const saveUid = createAction('SAVE_UID');
+export const saveUserRef = createAction('SAVE_USER_REF');
 
 export const sendMsg = createAction('SEND_MSG', data => {
     fireRef.push({

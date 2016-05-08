@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { OrderedMap } from 'immutable';
+import { Map, OrderedMap } from 'immutable';
 import initialState from '../store/initialState';
 
 const App = handleActions({
@@ -10,6 +10,10 @@ const App = handleActions({
     SAVE_UID: (state, action) => ({
         ...state,
         uid: action.payload
+    }),
+    SAVE_USER_REF: (state, action) => ({
+        ...state,
+        userRef: action.payload
     }),
 
     SET_MSG_TO_LIST: (state, action) => ({
@@ -37,12 +41,37 @@ const App = handleActions({
         monitor: action.payload
     }),
 
-    COUNTER_CHANGED: (state, action) => {
-      return {
-        ...state,
-        onlineCounter: action.payload.slice(1)
-      };
-    },
+    SET_PRESENCE: (state, action) => ({
+      ...state,
+      presence: Map(action.payload)
+    }),
+    COUNTER_CHANGED: (state, action) => ({
+      ...state,
+      onlineCounter: state.onlineCounter.update(
+          state.presence.get(action.payload.key), 1,
+          v => v - 1
+        ).update(
+          action.payload.value, 0,
+          v => v + 1
+        ),
+      presence: state.presence.set(action.payload.key, action.payload.value)
+    }),
+    COUNTER_ADDED: (state, action) => ({
+      ...state,
+      onlineCounter: state.onlineCounter.update(
+        action.payload.value, 0,
+        v => v + 1
+      ),
+      presence: state.presence.set(action.payload.key, action.payload.value)
+    }),
+    COUNTER_REMOVED: (state, action) => ({
+      ...state,
+      onlineCounter: state.onlineCounter.update(
+        action.payload.value, 1,
+        v => v - 1
+      ),
+      presence: state.presence.delete(action.payload.key)
+    }),
 
     SET_PLAYER: (state, action) => ({
         ...state,

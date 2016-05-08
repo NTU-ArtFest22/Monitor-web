@@ -26,7 +26,7 @@
     "server": "better-npm-run server",
     "stop": "forever stopall",
     "prod": "better-npm-run prod",
-    "push": "npm run deploy:prod && npm run build:server && git subtree push --prefix dist origin gh-pages"
+    "push": "git subtree push --prefix dist origin gh-pages"
   },
   "betterScripts": {
     "server": {

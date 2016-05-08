@@ -4,13 +4,13 @@ import { switchMonitor } from '../Actions/Monitors';
 
 const mapStateToProps = (state, ownProps) => ({
     active: state.app.monitor === ownProps.monitor,
-    counter: state.app.onlineCounter[ownProps.monitor - 1] || 0,
+    counter: state.app.onlineCounter.get(ownProps.monitor) || 0,
     src: state.app.players[ownProps.monitor - 1].src
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     switchMonitor: () => {
-        dispatch(switchMonitor(ownProps.curMonitor, ownProps.monitor));
+        dispatch(switchMonitor(ownProps.userRef, ownProps.monitor));
     }
 });
 

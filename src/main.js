@@ -10,8 +10,8 @@ import initialState from './store/initialState';
 import Firebase from 'firebase';
 import { w3cwebsocket as W3cWebSocket } from 'websocket';
 
-import { configureFirebase, saveUid } from './Actions/ChatList';
-import { counterChanged } from './Actions/Socket';
+import { configureFirebase, saveUid, saveUserRef } from './Actions/ChatList';
+import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
 import { switchMonitor } from './Actions/Monitors';
 import { controlUp, controlDown, controlLeft, controlRight, stopControl } from './Actions/Videos';
 
@@ -40,29 +40,64 @@ const history = syncHistoryWithStore(browserHistory, store, {
 // ========================================================
 const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
 const counterRef = new Firebase('https://monitor-web.firebaseio.com/counter');
+const presenceRef = new Firebase('https://monitor-web.firebaseio.com/presence');
+const connectedRef = new Firebase('https://monitor-web.firebaseio.com/.info/connected');
+const userRef = presenceRef.push();
 
 store.dispatch(configureFirebase(fireRef));
 
-fireRef.authAnonymously((error, authData) => {
-    if (error) {
+connectedRef.on('value', snap => {
+  if (snap.val()) {
+    fireRef.authAnonymously((error, authData) => {
+      if (error) {
         console.log(error);
-    }
-    else {
+      }
+      else {
         store.dispatch(saveUid(authData.uid));
-    }
-});
-
-counterRef.child(store.getState().app.monitor).transaction(cur => (cur || 0) + 1);
-
-counterRef.on('value', (snap) => {
-    counterRef.onDisconnect().update({
-        [store.getState().app.monitor]: (snap.val()[store.getState().app.monitor] || 1) - 1
+      }
     });
+
+    userRef.onDisconnect().remove();
+
+    userRef.set(store.getState().app.monitor);
+    store.dispatch(saveUserRef(userRef));
+  }
 });
 
-counterRef.on('value', counters => {
-    store.dispatch(counterChanged(counters.val() || []));
+presenceRef.once('value', snap => {
+  store.dispatch(setPresence(snap.val()));
 });
+
+presenceRef.on('child_added', snap => {
+  store.dispatch(counterAdded(snap.key(), snap.val()));
+});
+
+presenceRef.on('child_changed', snap => {
+  store.dispatch(counterChanged(snap.key(), snap.val()));
+});
+
+presenceRef.on('child_removed', snap => {
+  store.dispatch(counterRemoved(snap.key(), snap.val()));
+})
+
+// counterRef.authAnonymously((error, authData) => {
+//   if (error) {
+//     console.log(error);
+//   }
+//   else {
+//     counterRef.child(store.getState().app.monitor).transaction(cur => (cur || 0) + 1);
+//
+//     counterRef.on('value', (snap) => {
+//         counterRef.onDisconnect().update({
+//             [store.getState().app.monitor]: (snap.val()[store.getState().app.monitor] || 1) - 1
+//         });
+//     });
+//
+//     counterRef.on('value', counters => {
+//         store.dispatch(counterChanged(counters.val() || []));
+//     });
+//   }
+// });
 
 // ========================================================
 // Websocket with stage setup

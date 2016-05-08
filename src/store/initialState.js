@@ -1,7 +1,8 @@
-import { OrderedMap } from 'immutable';
+import { Map, OrderedMap } from 'immutable';
 
 const initialState = {
-  onlineCounter: [],
+  onlineCounter: Map(),
+  presence: Map(),
   monitor: 1,
   player: null,
   players: [

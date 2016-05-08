@@ -13,7 +13,7 @@ export const createRoutes = (store) => ({
   },
   childRoutes: [
     {
-      path: '/chat'
+      path: 'chat'
     }
   ]
 });
