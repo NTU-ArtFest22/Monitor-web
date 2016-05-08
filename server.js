@@ -12,10 +12,6 @@ var _koaStatic = require('koa-static');
 
 var _koaStatic2 = _interopRequireDefault(_koaStatic);
 
-var _koaSend = require('koa-send');
-
-var _koaSend2 = _interopRequireDefault(_koaSend);
-
 var _koaConnectHistoryApiFallback = require('koa-connect-history-api-fallback');
 
 var _koaConnectHistoryApiFallback2 = _interopRequireDefault(_koaConnectHistoryApiFallback);
@@ -75,10 +71,6 @@ app.use((0, _koaConvert2.default)((0, _koaConnectHistoryApiFallback2.default)({
 })));
 
 app.use((0, _koaConvert2.default)((0, _koaStatic2.default)(__dirname)));
-
-// app.use(function * () {
-//   yield send(this, __dirname + '/index.html');
-// });
 
 app.listen(PORT);
 
