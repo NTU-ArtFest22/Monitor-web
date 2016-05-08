@@ -69,6 +69,10 @@ counterRef.on('value', counters => {
 // ========================================================
 const stageSocket = new W3cWebSocket('ws://localhost:9000', null);
 
+stageSocket.onerror = () => {
+  console.log('not stage server, skip socket connection...');
+}
+
 stageSocket.onmessage = (e) => {
     const cur = store.getState().app.monitor;
     const len = store.getState().app.players.length;
