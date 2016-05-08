@@ -77,26 +77,7 @@ presenceRef.on('child_changed', snap => {
 
 presenceRef.on('child_removed', snap => {
   store.dispatch(counterRemoved(snap.key(), snap.val()));
-})
-
-// counterRef.authAnonymously((error, authData) => {
-//   if (error) {
-//     console.log(error);
-//   }
-//   else {
-//     counterRef.child(store.getState().app.monitor).transaction(cur => (cur || 0) + 1);
-//
-//     counterRef.on('value', (snap) => {
-//         counterRef.onDisconnect().update({
-//             [store.getState().app.monitor]: (snap.val()[store.getState().app.monitor] || 1) - 1
-//         });
-//     });
-//
-//     counterRef.on('value', counters => {
-//         store.dispatch(counterChanged(counters.val() || []));
-//     });
-//   }
-// });
+});
 
 // ========================================================
 // Websocket with stage setup
@@ -113,11 +94,11 @@ stageSocket.onmessage = (e) => {
 
     if (e.data === "client-up") {
         store.dispatch(controlUp());
-        store.dispatch(switchMonitor(cur > 1 ? cur - 1 : len));
+        store.dispatch(switchMonitor(userRef, cur > 1 ? cur - 1 : len));
     }
     else if (e.data === "client-down") {
         store.dispatch(controlDown());
-        store.dispatch(switchMonitor(cur < len ? cur + 1 : 1));
+        store.dispatch(switchMonitor(userRef, cur < len ? cur + 1 : 1));
     }
     else if (e.data === "client-left") {
         store.dispatch(controlLeft(cur));
