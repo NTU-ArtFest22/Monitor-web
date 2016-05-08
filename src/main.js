@@ -39,7 +39,6 @@ const history = syncHistoryWithStore(browserHistory, store, {
 // Firebase Setup
 // ========================================================
 const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
-const counterRef = new Firebase('https://monitor-web.firebaseio.com/counter');
 const presenceRef = new Firebase('https://monitor-web.firebaseio.com/presence');
 const connectedRef = new Firebase('https://monitor-web.firebaseio.com/.info/connected');
 const userRef = presenceRef.push();
