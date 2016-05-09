@@ -78,7 +78,8 @@
     "start": {
       "command": "babel-node bin/server",
       "env": {
-        "DEBUG": "app:*"
+        "DEBUG": "app:*",
+        "BASENAME": "/"
       }
     },
     "test": {

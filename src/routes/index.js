@@ -1,6 +1,7 @@
 // We only need to import the modules necessary for initial render
 import App from '../Containers/App';
 import Body from '../Containers/Body';
+import { switchMonitor } from '../Actions/Monitors';
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -14,6 +15,17 @@ export const createRoutes = (store) => ({
   childRoutes: [
     {
       path: 'chat'
+    },
+    {
+      path: 'monitor/:id',
+      component: Body,
+      onEnter: nextState => {
+        const monitor = store.getState().app.monitor;
+        const nextMonitor = nextState.params.id
+        if (monitor !== nextMonitor) {
+          store.dispatch(switchMonitor(Number(nextMonitor)));
+        }
+      }
     }
   ]
 });

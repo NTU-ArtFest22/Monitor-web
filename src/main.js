@@ -9,10 +9,11 @@ import styles from './css/style.css';
 import initialState from './store/initialState';
 import Firebase from 'firebase';
 import { w3cwebsocket as W3cWebSocket } from 'websocket';
+import { push } from 'react-router-redux';
 
 import { configureFirebase, saveUid, saveUserRef } from './Actions/ChatList';
 import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
-import { switchMonitor } from './Actions/Monitors';
+import { userRef, switchMonitor } from './Actions/Monitors';
 import { controlUp, controlDown, controlLeft, controlRight, stopControl } from './Actions/Videos';
 
 // ========================================================
@@ -41,7 +42,7 @@ const history = syncHistoryWithStore(browserHistory, store, {
 const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
 const presenceRef = new Firebase('https://monitor-web.firebaseio.com/presence');
 const connectedRef = new Firebase('https://monitor-web.firebaseio.com/.info/connected');
-const userRef = presenceRef.push();
+// const userRef = presenceRef.push();
 
 store.dispatch(configureFirebase(fireRef));
 
@@ -94,11 +95,11 @@ stageSocket.onmessage = (e) => {
 
     if (e.data === "client-up") {
         store.dispatch(controlUp());
-        store.dispatch(switchMonitor(userRef, cur > 1 ? cur - 1 : len));
+        store.dispatch(push(`monitor/${cur > 1 ? cur - 1 : len}`));
     }
     else if (e.data === "client-down") {
         store.dispatch(controlDown());
-        store.dispatch(switchMonitor(userRef, cur < len ? cur + 1 : 1));
+        store.dispatch(push(`monitor/${cur < len ? cur + 1 : 1}`));
     }
     else if (e.data === "client-left") {
         store.dispatch(controlLeft(cur));
