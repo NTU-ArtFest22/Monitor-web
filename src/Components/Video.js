@@ -2,13 +2,13 @@ import React from 'react';
 import Youtube from 'react-youtube';
 
 class Video extends React.Component {
-    _onReady(event) {
-        if (this.props.active) {
-            event.target.playVideo();
-        }
-
-        this.props.setPlayer(event.target);
-    }
+    // _onReady(event) {
+    //     if (this.props.active) {
+    //         event.target.playVideo();
+    //     }
+    //
+    //     this.props.setPlayer(event.target);
+    // }
     // componentWillReceiveProps(nextProps) {
     //     if (this.props.player) {
     //         if (nextProps.active) {
@@ -19,36 +19,41 @@ class Video extends React.Component {
     //         }
     //     }
     // }
-    togglePlay() {
-        const { player } = this.props;
-        if (player) {
-            if (player.getPlayerState() === 1) {
-                player.pauseVideo();
-            }
-            else {
-                player.playVideo();
-            }
-        }
-    }
+    // togglePlay() {
+    //     const { player } = this.props;
+    //     if (player) {
+    //         if (player.getPlayerState() === 1) {
+    //             player.pauseVideo();
+    //         }
+    //         else {
+    //             player.playVideo();
+    //         }
+    //     }
+    // }
 
     render() {
-        const { src, monitor } = this.props;
-        const opts = {
-            playerVars: {
-                cc_load_policy: 1,
-                controls: 0,
-                enablejsapi: 1,
-                iv_load_policy: 3,
-                rel: 0,
-                showinfo: 0,
-                autoplay: 1
-            }
-        };
+        const { src, monitor, onError, error } = this.props;
+        // const opts = {
+        //     playerVars: {
+        //         cc_load_policy: 1,
+        //         controls: 0,
+        //         enablejsapi: 1,
+        //         iv_load_policy: 3,
+        //         rel: 0,
+        //         showinfo: 0,
+        //         autoplay: 1
+        //     }
+        // };
 
         return (
             <div className="playerWrapper">
-                <Youtube videoId={src} className="player" id={`monitor${monitor}`} opts={opts} onReady={this._onReady.bind(this)} />
-                <div className="playerBlocker" onClick={this.togglePlay.bind(this)}></div>
+                {/*<Youtube videoId={src} className="player" id={`monitor${monitor}`} opts={opts} onReady={this._onReady.bind(this)} />*/}
+                <img src={!error ?
+                  `http://admin:bGFiNDI4LTQzMA==@140.112.202.155:9080/stream/video/mjpeg?dummy=para` :
+                  `http://admin:bGFiNDI4LTQzMA==@140.112.202.155:9080/stream/snapshot.jpg`
+                }
+                  onError={onError} />
+                {/*<div className="playerBlocker" onClick={this.togglePlay.bind(this)}></div>*/}
                 <div className="control-group">
                     <div className="left" onMouseDown={() => this.props.controlLeft()} onMouseUp={this.props.stopControl}></div>
                     <div className="right" onMouseDown={() => this.props.controlRight()} onMouseUp={this.props.stopControl}></div>

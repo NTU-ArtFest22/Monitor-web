@@ -2,18 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { useRouterHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { syncHistoryWithStore, push } from 'react-router-redux'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
-import styles from './css/style.css';
+require('./css/style.css');
 import initialState from './store/initialState';
 import Firebase from 'firebase';
 import { w3cwebsocket as W3cWebSocket } from 'websocket';
-import { push } from 'react-router-redux';
 
 import { configureFirebase, saveUid, saveUserRef } from './Actions/ChatList';
 import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
-import { userRef, switchMonitor } from './Actions/Monitors';
+import { userRef } from './Actions/Monitors';
 import { controlUp, controlDown, controlLeft, controlRight, stopControl } from './Actions/Videos';
 
 // ========================================================

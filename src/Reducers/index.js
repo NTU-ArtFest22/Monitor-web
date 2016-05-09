@@ -106,6 +106,17 @@ const App = handleActions({
     CONTROL_INTERACT: state => ({
         ...state,
         control: 'interact'
+    }),
+    ON_ERROR: (state, action) => ({
+      ...state,
+      players: [
+        ...state.players.slice(0, action.payload - 1),
+        {
+          ...state.players[action.payload - 1],
+          error: true
+        },
+        ...state.players.slice(action.payload)
+      ]
     })
 }, initialState);
 

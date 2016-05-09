@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import video from '../Components/Video';
-import { setPlayer, sendControlMsg, controlLeft, controlRight, stopControl, controlInteract } from '../Actions/Videos';
+import { setPlayer, sendControlMsg, controlLeft, controlRight, stopControl, controlInteract, onError } from '../Actions/Videos';
 
 const mapStateToProps = (state, ownProps) => ({
     src: state.app.players[state.app.monitor - 1].src,
-    player: state.app.player
+    player: state.app.player,
+    error: state.app.players[state.app.monitor - 1].error
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
     setPlayer: (player, monitor) => {
         dispatch(setPlayer(player, monitor));
     },
@@ -25,6 +26,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     controlInteract: () => {
         dispatch(controlInteract());
+    },
+    onError: () => {
+      dispatch(onError(ownProps.monitor));
     }
 });
 

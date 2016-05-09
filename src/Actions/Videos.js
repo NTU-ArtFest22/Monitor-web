@@ -51,3 +51,5 @@ export const controlInteract = createAction('CONTROL_INTERACT', (monitor) => {
         "target": "clapper"
     }));
 });
+
+export const onError = createAction('ON_ERROR');

@@ -353,6 +353,14 @@ html, body {
     width: calc(100% - 208px);
     height: 100%;
 
+    > img {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
     .playerBlocker {
         z-index: 100;
         position: absolute;
