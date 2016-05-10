@@ -33,7 +33,8 @@
       "command": "npm run build:server && npm run stop && forever start dist/server.js",
       "env": {
         "NODE_ENV": "production",
-        "BASENAME": ""
+        "BASENAME": "",
+        "PORT": 80
       }
     },
     "prod": {
