@@ -22,7 +22,7 @@ var _websocket = require('websocket');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 80;
 var STAGE_PORT = process.env.STAGE_PORT || 9000;
 
 // ==============================================

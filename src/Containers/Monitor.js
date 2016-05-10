@@ -4,7 +4,8 @@ import monitor from '../Components/Monitor';
 const mapStateToProps = (state, ownProps) => ({
     active: ownProps.curMonitor.toString() === ownProps.monitor.toString(),
     counter: state.app.onlineCounter.get(ownProps.monitor.toString()) || 0,
-    thumbnail: state.app.players.get(ownProps.monitor.toString()).thumbnail
+    thumbnail: state.app.players.get(ownProps.monitor.toString()).thumbnail,
+    reload: state.app.reload
 });
 
 const Monitor = connect(mapStateToProps)(monitor);

@@ -101,7 +101,7 @@ const App = handleActions({
     }),
     STOP_CONTROL: state => ({
         ...state,
-        control: 'stop'
+        // control: 'stop'
     }),
     CONTROL_INTERACT: state => ({
         ...state,
@@ -131,6 +131,10 @@ const App = handleActions({
     PAUSE: (state) => ({
       ...state,
       pause: !state.pause
+    }),
+    RELOAD: state => ({
+      ...state,
+      reload: Math.floor(Math.random() * 10000).toString()
     })
 }, initialState);
 

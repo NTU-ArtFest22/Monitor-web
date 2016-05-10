@@ -16,14 +16,19 @@ const initialState = {
   pause: false,
   players: Map({
     1: new PlayerRec({
-      src: "http://108.61.200.60:5001/stream",
-      thumbnail: "http://108.61.200.60:5001/snapshot",
-      ws: "ws://108.61.200.60:6001"
+      src: "http://140.112.202.156:1002/stream",
+      thumbnail: "http://140.112.202.156:1002/snapshot",
+      ws: "ws://140.112.202.156:2002"
     }),
     2: new PlayerRec({
-      src: "http://108.61.200.60:5000/stream",
-      thumbnail: "http://108.61.200.60:5000/snapshot",
-      ws: "ws://108.61.200.60:6000"
+      src: "http://140.112.202.156:1001/stream",
+      thumbnail: "http://140.112.202.156:1001/snapshot",
+      ws: "ws://140.112.202.156:2001"
+    }),
+    3: new PlayerRec({
+      src: "http://140.112.202.156:1003/stream",
+      thumbnail: "http://140.112.202.156:1003/snapshot",
+      ws: "ws://140.112.202.156:2003"
     })
   }),
   showChat: true,

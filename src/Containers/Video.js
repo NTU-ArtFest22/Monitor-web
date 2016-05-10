@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import video from '../Components/Video';
 import { setPlayer, sendControlMsg, controlLeft, controlRight,
-  stopControl, controlInteract, onError, onLoad, updateFrames, pause }
+  stopControl, controlInteract, onError, onLoad, updateFrames, pause, reload }
   from '../Actions/Videos';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -12,8 +12,11 @@ const mapStateToProps = (state, ownProps) => ({
     player: state.app.player,
     monitor: state.app.monitor,
     error: state.app.players.get(state.app.monitor.toString()).error,
-    pause: state.app.pause
+    pause: state.app.pause,
+    reload: state.app.reload
 });
+
+let reloadInterval = null;
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     setPlayer: (player, monitor) => {
@@ -38,7 +41,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       dispatch(onError(monitor));
     },
     onLoad: monitor => {
-      dispatch(onLoad(monitor));
+      clearInterval(reloadInterval);
+      reloadInterval = setInterval(() => {
+        dispatch(onLoad(monitor));
+        dispatch(reload());
+      }, 10000);
     },
     updateFrames: (monitor, src) => {
       dispatch(updateFrames(monitor, src));

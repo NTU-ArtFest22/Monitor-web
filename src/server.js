@@ -5,7 +5,7 @@ import historyApiFallback from 'koa-connect-history-api-fallback';
 import { createServer } from 'http';
 import { server as WebSocketServer } from 'websocket';
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 80;
 const STAGE_PORT = process.env.STAGE_PORT || 9000;
 
 // ==============================================

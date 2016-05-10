@@ -10,10 +10,10 @@ import initialState from './store/initialState';
 import Firebase from 'firebase';
 import { w3cwebsocket as W3cWebSocket } from 'websocket';
 
-import { configureFirebase, saveUid, saveUserRef } from './Actions/ChatList';
+import { configureFirebase, saveUid } from './Actions/ChatList';
 import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
 import { userRef } from './Actions/Monitors';
-import { controlUp, controlDown, controlLeft, controlRight, stopControl } from './Actions/Videos';
+import { controlUp, controlDown, controlLeft, controlRight } from './Actions/Videos';
 
 // ========================================================
 // Browser History Setup
