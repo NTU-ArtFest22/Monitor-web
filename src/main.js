@@ -13,7 +13,7 @@ import { w3cwebsocket as W3cWebSocket } from 'websocket';
 import { configureFirebase, saveUid } from './Actions/ChatList';
 import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
 import { userRef } from './Actions/Monitors';
-import { controlUp, controlDown, controlLeft, controlRight } from './Actions/Videos';
+import { controlUp, controlDown, controlLeft, controlRight, stopControl } from './Actions/Videos';
 
 // ========================================================
 // Browser History Setup
@@ -87,8 +87,8 @@ stageSocket.onerror = () => {
 }
 
 stageSocket.onmessage = (e) => {
-    const cur = store.getState().app.monitor;
-    const len = store.getState().app.players.length;
+    const cur = +store.getState().app.monitor;
+    const len = store.getState().app.players.size;
 
     if (e.data === "client-up") {
         store.dispatch(controlUp());
