@@ -41,7 +41,6 @@ const history = syncHistoryWithStore(browserHistory, store, {
 const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
 const presenceRef = new Firebase('https://monitor-web.firebaseio.com/presence');
 const connectedRef = new Firebase('https://monitor-web.firebaseio.com/.info/connected');
-// const userRef = presenceRef.push();
 
 store.dispatch(configureFirebase(fireRef));
 
@@ -59,7 +58,6 @@ connectedRef.on('value', snap => {
     userRef.onDisconnect().remove();
 
     userRef.set(store.getState().app.monitor);
-    store.dispatch(saveUserRef(userRef));
   }
 });
 

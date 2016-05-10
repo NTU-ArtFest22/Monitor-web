@@ -1,58 +1,22 @@
 import React from 'react';
-import Youtube from 'react-youtube';
+import { w3cwebsocket as W3cWebSocket } from 'websocket';
 
 class Video extends React.Component {
-    // _onReady(event) {
-    //     if (this.props.active) {
-    //         event.target.playVideo();
-    //     }
-    //
-    //     this.props.setPlayer(event.target);
-    // }
-    // componentWillReceiveProps(nextProps) {
-    //     if (this.props.player) {
-    //         if (nextProps.active) {
-    //             this.props.player.playVideo();
-    //         }
-    //         else {
-    //             this.props.player.stopVideo();
-    //         }
-    //     }
-    // }
-    // togglePlay() {
-    //     const { player } = this.props;
-    //     if (player) {
-    //         if (player.getPlayerState() === 1) {
-    //             player.pauseVideo();
-    //         }
-    //         else {
-    //             player.playVideo();
-    //         }
-    //     }
-    // }
-
-    render() {
-        const { src, monitor, onError, error } = this.props;
-        // const opts = {
-        //     playerVars: {
-        //         cc_load_policy: 1,
-        //         controls: 0,
-        //         enablejsapi: 1,
-        //         iv_load_policy: 3,
-        //         rel: 0,
-        //         showinfo: 0,
-        //         autoplay: 1
-        //     }
-        // };
+    render () {
+        const { monitor, src, onError, error, togglePause, pause, thumbnail, onLoad } = this.props;
 
         return (
             <div className="playerWrapper">
-                {/*<Youtube videoId={src} className="player" id={`monitor${monitor}`} opts={opts} onReady={this._onReady.bind(this)} />*/}
-                <img src={!error ?
-                  `http://admin:bGFiNDI4LTQzMA==@140.112.202.155:9080/stream/video/mjpeg?dummy=para` :
-                  `http://admin:bGFiNDI4LTQzMA==@140.112.202.155:9080/stream/snapshot.jpg`
-                }
-                  onError={onError} />
+                <img id={`monitor${monitor}`}
+                  src={error ? '/favicon.ico' : (pause ? thumbnail : src)}
+                  onError={() => onError(monitor)}
+                  onLoad={() => onLoad(monitor)}
+                  onClick={togglePause} />
+                {/*<div className="player" id={`monitor${monitor}`}>
+                  {frames.map( (frame, z) => (
+                    <img key={`frame${z}`} src={frame} style={{ zIndex: z }} />
+                  ))}
+                </div>*/}
                 {/*<div className="playerBlocker" onClick={this.togglePlay.bind(this)}></div>*/}
                 <div className="control-group">
                     <div className="left" onMouseDown={() => this.props.controlLeft()} onMouseUp={this.props.stopControl}></div>

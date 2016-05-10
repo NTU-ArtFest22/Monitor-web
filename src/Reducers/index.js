@@ -51,7 +51,7 @@ const App = handleActions({
           state.presence.get(action.payload.key), 1,
           v => v - 1
         ).update(
-          action.payload.value, 0,
+          action.payload.value.toString(), 0,
           v => v + 1
         ),
       presence: state.presence.set(action.payload.key, action.payload.value)
@@ -59,7 +59,7 @@ const App = handleActions({
     COUNTER_ADDED: (state, action) => ({
       ...state,
       onlineCounter: state.onlineCounter.update(
-        action.payload.value, 0,
+        action.payload.value.toString(), 0,
         v => v + 1
       ),
       presence: state.presence.set(action.payload.key, action.payload.value)
@@ -67,7 +67,7 @@ const App = handleActions({
     COUNTER_REMOVED: (state, action) => ({
       ...state,
       onlineCounter: state.onlineCounter.update(
-        action.payload.value, 1,
+        action.payload.value.toString(), 1,
         v => v - 1
       ),
       presence: state.presence.delete(action.payload.key)
@@ -109,14 +109,28 @@ const App = handleActions({
     }),
     ON_ERROR: (state, action) => ({
       ...state,
-      players: [
-        ...state.players.slice(0, action.payload - 1),
-        {
-          ...state.players[action.payload - 1],
-          error: true
-        },
-        ...state.players.slice(action.payload)
-      ]
+      players: state.players.update(
+        action.payload.toString(),
+        r => r.set("error", true)
+      )
+    }),
+    ON_LOAD: (state, action) => ({
+      ...state,
+      players: state.players.update(
+        action.payload.toString(),
+        r => r.set("error", false)
+      )
+    }),
+    UPDATE_FRAMES: (state, action) => ({
+      ...state,
+      players: state.players.update(
+        action.payload.monitor.toString(),
+        r => r.update("frames", frames => frames.push(action.payload.src).takeLast(10))
+      )
+    }),
+    PAUSE: (state) => ({
+      ...state,
+      pause: !state.pause
     })
 }, initialState);
 

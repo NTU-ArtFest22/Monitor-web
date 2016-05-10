@@ -1,11 +1,18 @@
 import { connect } from 'react-redux';
 import video from '../Components/Video';
-import { setPlayer, sendControlMsg, controlLeft, controlRight, stopControl, controlInteract, onError } from '../Actions/Videos';
+import { setPlayer, sendControlMsg, controlLeft, controlRight,
+  stopControl, controlInteract, onError, onLoad, updateFrames, pause }
+  from '../Actions/Videos';
 
 const mapStateToProps = (state, ownProps) => ({
-    src: state.app.players[state.app.monitor - 1].src,
+    src: state.app.players.get(state.app.monitor.toString()).src,
+    ws: state.app.players.get(state.app.monitor.toString()).ws,
+    thumbnail: state.app.players.get(state.app.monitor.toString()).thumbnail,
+    frames: state.app.players.get(state.app.monitor.toString()).frames,
     player: state.app.player,
-    error: state.app.players[state.app.monitor - 1].error
+    monitor: state.app.monitor,
+    error: state.app.players.get(state.app.monitor.toString()).error,
+    pause: state.app.pause
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -27,8 +34,17 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     controlInteract: () => {
         dispatch(controlInteract());
     },
-    onError: () => {
-      dispatch(onError(ownProps.monitor));
+    onError: monitor => {
+      dispatch(onError(monitor));
+    },
+    onLoad: monitor => {
+      dispatch(onLoad(monitor));
+    },
+    updateFrames: (monitor, src) => {
+      dispatch(updateFrames(monitor, src));
+    },
+    togglePause: () => {
+      dispatch(pause());
     }
 });
 

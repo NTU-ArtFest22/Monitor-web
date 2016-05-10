@@ -23,7 +23,7 @@ export const createRoutes = (store) => ({
         const monitor = store.getState().app.monitor;
         const nextMonitor = nextState.params.id
         if (monitor !== nextMonitor) {
-          store.dispatch(switchMonitor(Number(nextMonitor)));
+          store.dispatch(switchMonitor(nextMonitor));
         }
       }
     }

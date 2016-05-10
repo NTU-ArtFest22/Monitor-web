@@ -1,22 +1,31 @@
-import { Map, OrderedMap } from 'immutable';
+import { Map, List, Record, OrderedMap } from 'immutable';
+
+const PlayerRec = Record({
+  src: "http://108.61.200.60:5001/stream",
+  thumbnail: "http://108.61.200.60:5001/snapshot",
+  ws: "ws://108.61.200.60:6001",
+  frames: List(),
+  error: false
+});
 
 const initialState = {
   onlineCounter: Map(),
   presence: Map(),
-  monitor: 1,
+  monitor: "1",
   player: null,
-  players: [
-    { src: "2O0QlJz8EFc" },
-    { src: "JTIWNoUDHP4" },
-    { src: "RHmH_uq9Ops" },
-    { src: "EyepEXOlRmY" },
-    { src: "GLE9_LwzDjs" },
-    { src: "eH7hBiY9xkg" },
-    { src: "mx6t6E24SSM" },
-    { src: "2WMnw14bHbM" },
-    { src: "8B3jQP9gNyg" },
-    { src: "KF47Za1lfjM" }
-  ],
+  pause: false,
+  players: Map({
+    1: new PlayerRec({
+      src: "http://108.61.200.60:5001/stream",
+      thumbnail: "http://108.61.200.60:5001/snapshot",
+      ws: "ws://108.61.200.60:6001"
+    }),
+    2: new PlayerRec({
+      src: "http://108.61.200.60:5000/stream",
+      thumbnail: "http://108.61.200.60:5000/snapshot",
+      ws: "ws://108.61.200.60:6000"
+    })
+  }),
   showChat: true,
   records: OrderedMap(),
   willScroll: true,

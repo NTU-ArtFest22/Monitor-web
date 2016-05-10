@@ -53,3 +53,8 @@ export const controlInteract = createAction('CONTROL_INTERACT', (monitor) => {
 });
 
 export const onError = createAction('ON_ERROR');
+export const onLoad = createAction('ON_LOAD');
+
+export const updateFrames = createAction('UPDATE_FRAMES', (monitor, src) => ({ monitor, src }));
+
+export const pause = createAction('PAUSE');
