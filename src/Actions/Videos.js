@@ -45,6 +45,8 @@ export const stopControl = createAction('STOP_CONTROL', (monitor) => {
     }));
 });
 
+export const controlStop = createAction('CONTROL_STOP');
+
 export const controlInteract = createAction('CONTROL_INTERACT', (monitor) => {
     client.publish('robot003', JSON.stringify({
         "uid": clientId,

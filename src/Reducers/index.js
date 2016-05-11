@@ -99,6 +99,10 @@ const App = handleActions({
         ...state,
         control: 'right'
     }),
+    CONTROL_STOP: state => ({
+      ...state,
+      control: 'stop'
+    }),
     STOP_CONTROL: state => ({
         ...state,
         // control: 'stop'

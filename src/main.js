@@ -13,7 +13,7 @@ import { w3cwebsocket as W3cWebSocket } from 'websocket';
 import { configureFirebase, saveUid } from './Actions/ChatList';
 import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
 import { userRef } from './Actions/Monitors';
-import { controlUp, controlDown, controlLeft, controlRight, stopControl } from './Actions/Videos';
+import { controlUp, controlDown, controlLeft, controlRight, controlStop, stopControl } from './Actions/Videos';
 
 // ========================================================
 // Browser History Setup
@@ -91,17 +91,21 @@ stageSocket.onmessage = (e) => {
     const len = store.getState().app.players.size;
 
     if (e.data === "client-up") {
+        store.dispatch(controlStop());
         store.dispatch(controlUp());
         store.dispatch(push(`monitor/${cur > 1 ? cur - 1 : len}`));
     }
     else if (e.data === "client-down") {
+        store.dispatch(controlStop());
         store.dispatch(controlDown());
         store.dispatch(push(`monitor/${cur < len ? cur + 1 : 1}`));
     }
     else if (e.data === "client-left") {
+        store.dispatch(controlStop());
         store.dispatch(controlLeft(cur));
     }
     else if (e.data === "client-right") {
+        store.dispatch(controlStop());
         store.dispatch(controlRight(cur));
     }
     else if (e.data === "client-stop") {

@@ -27,6 +27,21 @@ html, body {
     }
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+
 .body {
     width: 100vw;
     height: 100vh;
@@ -51,6 +66,34 @@ html, body {
                 transform: rotate(180deg);
             }
         }
+    }
+
+    .control-popup {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: rgba(255, 255, 255, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+
+      i {
+        font-size: 100px;
+        max-width: 100px;
+      }
+
+      &.down, &.up, &.right, &.left {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
     }
 
     .toggleShowChat {
