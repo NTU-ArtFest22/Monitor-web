@@ -31,9 +31,9 @@ const initialState = {
       ws: "ws://192.168.0.13:2003"
     }),
     4: new PlayerRec({
-      src: "http://192.168.0.13:1003/stream",
-      thumbnail: "http://192.168.0.13:1003/snapshot",
-      ws: "ws://192.168.0.13:2003"
+      src: "http://192.168.0.13:1004/stream",
+      thumbnail: "http://192.168.0.13:1004/snapshot",
+      ws: "ws://192.168.0.13:2004"
     })
   }),
   showChat: true,
