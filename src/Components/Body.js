@@ -14,12 +14,14 @@ const mapControlToIconName = control => {
       return 'arrow_forward';
     case 'left':
       return 'arrow_backward';
+    case 'interact':
+      return 'touch_app';
     default:
       return '';
   }
 };
 
-const Body = ({ showChat, toggleShowChat, control }) => (
+const Body = ({ showChat, toggleShowChat, control, controlStop }) => (
   <div className={classNames('body', { 'showChat': showChat }, control)}>
     <Video />
     <div className="before"></div>
@@ -30,9 +32,10 @@ const Body = ({ showChat, toggleShowChat, control }) => (
     </a>
 
     {control !== "stop" ? (
-      <span className={classNames('control-popup', control)}><i className="material-icons">{mapControlToIconName(control)}</i></span>
+      <span className={classNames('control-popup', control, { 'stop': controlStop })}>
+        <i className="material-icons">{mapControlToIconName(control)}</i>
+      </span>
     ): ''}
-    {/*<span className={classNames({'control-popup': control !== "stop"}, control)}><i className="material-icons">{mapControlToIconName(control)}</i></span>*/}
   </div>
 );
 

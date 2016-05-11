@@ -93,19 +93,21 @@ const App = handleActions({
     }),
     CONTROL_LEFT: state => ({
         ...state,
-        control: 'left'
+        control: 'left',
+        controlStop: false
     }),
     CONTROL_RIGHT: state => ({
         ...state,
-        control: 'right'
+        control: 'right',
+        controlStop: false
     }),
     CONTROL_STOP: state => ({
-      ...state,
-      control: 'stop'
+        ...state,
+        control: 'stop'
     }),
     STOP_CONTROL: state => ({
         ...state,
-        // control: 'stop'
+        controlStop: true
     }),
     CONTROL_INTERACT: state => ({
         ...state,

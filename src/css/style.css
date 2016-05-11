@@ -85,14 +85,20 @@ html, body {
       justify-content: center;
       align-items: center;
       opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 
       i {
         font-size: 100px;
         max-width: 100px;
       }
 
-      &.down, &.up, &.right, &.left {
+      &.down, &.up, &.interact {
         animation: fadeIn 0.5s ease-out forwards;
+      }
+      &.right:not(.stop), &.left:not(.stop) {
+        opacity: 1;
+        transform: scale(1.0);
       }
     }
 
@@ -169,6 +175,7 @@ html, body {
     padding: 40px 20px;
     transform: translateX(0%);
     transition: transform 0.5s ease-out;
+    background-color: #F5F5F5;
 
     .chatlist {
         position: relative;
@@ -176,7 +183,7 @@ html, body {
         margin: 0 0 20px;
         width: 100%;
         height: calc(100% - 80px);
-        background-color: white;
+        background-color: #F5F5F5;
         list-style: none;
         font-size: 1em;
         line-height: 1.6em;
@@ -285,6 +292,12 @@ html, body {
             padding-right: 50px;
             resize: none;
             border-color: #CCC;
+            outline: none;
+            background-color: #F5F5F5;
+
+            &:focus {
+              background-color: #FFF;
+            }
         }
 
         .send-msg-submit {
@@ -301,8 +314,12 @@ html, body {
             font-size: 16px;
             padding: 10px 5px;
             line-height: 1.5em;
-            background-color: #8BC34A;
+            background-color: $arrow-hover-color;
             color: #FFF;
+            display: flex;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
         }
 
         .new-msg-hint {

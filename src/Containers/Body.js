@@ -8,7 +8,8 @@ const mapStateToProps = (state, ownProps) => ({
   monitor: state.app.monitor,
   curMonitor: ownProps.params.id,
   userRef: state.app.userRef,
-  control: state.app.control
+  control: state.app.control,
+  controlStop: state.app.controlStop
 });
 
 const mapDispatchToProps = (dispatch) => ({
