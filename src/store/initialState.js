@@ -16,24 +16,24 @@ const initialState = {
   pause: false,
   players: Map({
     1: new PlayerRec({
-      src: "http://192.168.0.13:1002/stream",
-      thumbnail: "http://192.168.0.13:1002/snapshot",
-      ws: "ws://192.168.0.13:2002"
+      src: "http://140.112.202.156:1001/stream",
+      thumbnail: "http://140.112.202.156:1001/snapshot",
+      ws: "ws://140.112.202.156:1001"
     }),
     2: new PlayerRec({
-      src: "http://192.168.0.13:1001/stream",
-      thumbnail: "http://192.168.0.13:1001/snapshot",
-      ws: "ws://192.168.0.13:2001"
+      src: "http://140.112.202.156:1002/stream",
+      thumbnail: "http://140.112.202.156:1002/snapshot",
+      ws: "ws://140.112.202.156:1002"
     }),
     3: new PlayerRec({
-      src: "http://192.168.0.13:1003/stream",
-      thumbnail: "http://192.168.0.13:1003/snapshot",
-      ws: "ws://192.168.0.13:2003"
+      src: "http://140.112.202.156:1003/stream",
+      thumbnail: "http://140.112.202.156:1003/snapshot",
+      ws: "ws://140.112.202.156:1003"
     }),
     4: new PlayerRec({
-      src: "http://192.168.0.13:1004/stream",
-      thumbnail: "http://192.168.0.13:1004/snapshot",
-      ws: "ws://192.168.0.13:2004"
+      src: "http://140.112.202.156:1004/stream",
+      thumbnail: "http://140.112.202.156:1004/snapshot",
+      ws: "ws://140.112.202.156:1004"
     })
   }),
   showChat: true,
