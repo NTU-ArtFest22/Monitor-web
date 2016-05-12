@@ -1,9 +1,10 @@
 import webpack from 'webpack'
-import cssnano from 'cssnano'
+// import cssnano from 'cssnano'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from '../config'
 import _debug from 'debug'
+import StaticSiteGeneratorPlugin from 'static-site-generator-webpack-plugin';
 
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
@@ -11,6 +12,20 @@ var precss = require('precss');
 const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
 const {__DEV__, __PROD__, __TEST__} = config.globals
+
+const staticPaths = [
+  '/monitor/1/',
+  '/monitor/2/',
+  '/monitor/3/',
+  '/monitor/4/',
+  '/monitor/5/',
+  '/monitor/6/',
+  '/monitor/7/',
+  '/monitor/8/',
+  '/monitor/9/',
+  '/monitor/10/',
+  '/chat/'
+];
 
 debug('Create configuration.')
 const webpackConfig = {
@@ -58,7 +73,10 @@ webpackConfig.plugins = [
     minify: {
       collapseWhitespace: true
     }
-  })
+  }),
+  // new StaticSiteGeneratorPlugin('app', staticPaths, {
+  //   path: '/'
+  // })
 ]
 
 if (__DEV__) {

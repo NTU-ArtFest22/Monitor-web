@@ -12,6 +12,20 @@ export const createRoutes = (store) => ({
   indexRoute: {
     component: Body
   },
+  onEnter: nextState => {
+    const monitor = store.getState().app.monitor;
+    const nextMonitor = nextState.location.query.monitor
+    if (nextMonitor && monitor !== nextMonitor) {
+      store.dispatch(switchMonitor(nextMonitor));
+    }
+  },
+  onChange: (prevState, nextState) => {
+    const monitor = store.getState().app.monitor;
+    const nextMonitor = nextState.location.query.monitor
+    if (nextMonitor && monitor !== nextMonitor) {
+      store.dispatch(switchMonitor(nextMonitor));
+    }
+  },
   childRoutes: [
     {
       path: 'chat'

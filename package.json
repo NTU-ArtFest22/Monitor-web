@@ -183,6 +183,7 @@
     "redbox-react": "^1.2.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
+    "static-site-generator-webpack-plugin": "^2.0.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.6.0"
   }
