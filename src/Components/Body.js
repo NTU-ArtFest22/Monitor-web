@@ -21,7 +21,7 @@ const mapControlToIconName = control => {
   }
 };
 
-const Body = ({ showChat, toggleShowChat, control, controlStop }) => (
+const Body = ({ showChat, toggleShowChat, control, controlStop, loading }) => (
   <div className={classNames('body', { 'showChat': showChat }, control)}>
     <Video />
     <div className="before"></div>

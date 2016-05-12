@@ -2,6 +2,7 @@
 import App from '../Containers/App';
 import Body from '../Containers/Body';
 import { switchMonitor } from '../Actions/Monitors';
+import { toggleLoading } from '../Actions/Videos';
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -12,18 +13,26 @@ export const createRoutes = (store) => ({
   indexRoute: {
     component: Body
   },
-  onEnter: nextState => {
+  onEnter: (nextState) => {
     const monitor = store.getState().app.monitor;
     const nextMonitor = nextState.location.query.monitor
     if (nextMonitor && monitor !== nextMonitor) {
+      store.dispatch(toggleLoading());
       store.dispatch(switchMonitor(nextMonitor));
+      setTimeout(() => {
+        store.dispatch(toggleLoading());
+      }, 500);
     }
   },
   onChange: (prevState, nextState) => {
     const monitor = store.getState().app.monitor;
     const nextMonitor = nextState.location.query.monitor
     if (nextMonitor && monitor !== nextMonitor) {
+      store.dispatch(toggleLoading());
       store.dispatch(switchMonitor(nextMonitor));
+      setTimeout(() => {
+        store.dispatch(toggleLoading());
+      }, 500);
     }
   },
   childRoutes: [
@@ -37,7 +46,9 @@ export const createRoutes = (store) => ({
         const monitor = store.getState().app.monitor;
         const nextMonitor = nextState.params.id
         if (monitor !== nextMonitor) {
+          store.dispatch(toggleLoading());
           store.dispatch(switchMonitor(nextMonitor));
+          store.dispatch(toggleLoading());
         }
       }
     }

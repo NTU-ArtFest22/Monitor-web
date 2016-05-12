@@ -134,13 +134,18 @@ const App = handleActions({
         r => r.update("frames", frames => frames.push(action.payload.src).takeLast(10))
       )
     }),
+    TOGGLE_LOADING: (state) => ({
+      ...state,
+      loading: !state.loading
+    }),
     PAUSE: (state) => ({
       ...state,
       pause: !state.pause
     }),
     RELOAD: state => ({
       ...state,
-      reload: Math.floor(Math.random() * 10000).toString()
+      reload: Math.floor(Math.random() * 10000).toString(),
+      lastReload: state.reload
     })
 }, initialState);
 

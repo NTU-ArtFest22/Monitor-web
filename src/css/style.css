@@ -3,6 +3,7 @@
 $arrow-color: rgba(255, 193, 6, 0.3);
 $arrow-hover-color: rgba(255, 193, 6, 1);
 $border-width: 5px;
+$rwd-width: 768px;
 
 html, body {
     padding: 0;
@@ -24,6 +25,10 @@ html, body {
         display: flex;
         width: 100%;
         height: 100%;
+
+        @media (max-width: $rwd-width) {
+          flex-direction: column;
+        }
     }
 }
 
@@ -57,9 +62,20 @@ html, body {
     justify-content: space-between;
     transition: flex-basis 0.5s ease-out;
 
+    @media (max-width: $rwd-width) {
+      flex-direction: column;
+      height: auto;
+      flex-basis: auto;
+    }
+
     &.showChat {
         width: calc(100vw - 340px);
         flex-basis: calc(100vw - 340px);
+
+        @media (max-width: $rwd-width) {
+          width: 100%;
+          flex-basis: auto;
+        }
 
         .toggleShowChat {
             i {
@@ -115,6 +131,10 @@ html, body {
         z-index: 200;
         transition: background-color 0.2s ease-out;
 
+        @media (max-width: $rwd-width) {
+          display: none;
+        }
+
         &:hover {
             background-color: #FFF;
         }
@@ -135,6 +155,14 @@ html, body {
         display: block;
         z-index: 10;
 
+        @media (max-width: $rwd-width) {
+          bottom: 0;
+          height: 50px;
+          width: 20px;
+          top: auto;
+          right: auto;
+        }
+
         &:after {
             content: '';
             position: absolute;
@@ -147,20 +175,44 @@ html, body {
             width: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
+
+            @media (max-width: $rwd-width) {
+              border-top: 8px solid transparent;
+              border-bottom: 8px solid transparent;
+              border-left: 0;
+              border-right: 0;
+            }
         }
     }
     > .before {
         top: 0;
 
+        @media (max-width: $rwd-width) {
+          top: auto;
+          left: 0;
+        }
+
         &:after {
             border-bottom: 8px solid rgba(255, 255, 255, 0.7);
+
+            @media (max-width: $rwd-width) {
+              border-right: 8px solid rgba(255, 255, 255, 0.7);
+            }
         }
     }
     > .after {
         bottom: 0;
 
+        @media (max-width: $rwd-width) {
+          right: 0;
+        }
+
         &:after {
             border-top: 8px solid rgba(255, 255, 255, 0.7);
+
+            @media (max-width: $rwd-width) {
+              border-left: 8px solid rgba(255, 255, 255, 0.7);
+            }
         }
     }
 }
@@ -177,6 +229,11 @@ html, body {
     transition: transform 0.5s ease-out;
     background-color: #F5F5F5;
 
+    @media (max-width: $rwd-width) {
+      height: calc(100vh - 100vw / 640 * 480 - 50px);
+      padding: 20px;
+    }
+
     .chatlist {
         position: relative;
         padding: 0;
@@ -191,6 +248,11 @@ html, body {
         border: 1px solid #CCC;
         padding: 5px;
         box-sizing: border-box;
+
+        @media (max-width: $rwd-width) {
+          height: calc(100% - 40px);
+          margin-bottom: 10px;
+        }
 
         .chat {
             list-style-position: unset;
@@ -226,7 +288,7 @@ html, body {
             &:hover {
                 .send-time {
                     opacity: 1;
-                    background-color: rgba(255, 255, 255, 0.9);
+                    background-color: rgba(245, 245, 245, 0.9);
                 }
             }
 
@@ -282,6 +344,10 @@ html, body {
         width: 100%;
         height: 70px;
 
+        @media (max-width: $rwd-width) {
+          height: 30px;
+        }
+
         .send-msg-input {
             width: 100%;
             box-sizing: border-box;
@@ -294,6 +360,10 @@ html, body {
             border-color: #CCC;
             outline: none;
             background-color: #F5F5F5;
+
+            @media (max-width: $rwd-width) {
+              height: 30px;
+            }
 
             &:focus {
               background-color: #FFF;
@@ -320,6 +390,15 @@ html, body {
             cursor: pointer;
             justify-content: center;
             align-items: center;
+
+            @media (max-width: $rwd-width) {
+              height: 28px;
+              padding: 0 5px;
+
+              i {
+                font-size: 18px;
+              }
+            }
         }
 
         .new-msg-hint {
@@ -347,6 +426,12 @@ html, body {
     overflow: visible;
     padding: 30px 0;
     box-sizing: border-box;
+
+    @media (max-width: $rwd-width) {
+      width: 100%;
+      height: 50px;
+      padding: 0 20px;
+    }
 }
 
 .monitor {
@@ -367,6 +452,13 @@ html, body {
     box-sizing: border-box;
     transition: background-size 0.2s ease-out, border-color 0.2s ease-out;
     overflow: hidden;
+
+    @media (max-width: $rwd-width) {
+      height: 100%;
+      float: left;
+      width: 66.67px;
+      border-width: 3px;
+    }
 
     &:hover, &.active {
         background-size: 110%;
@@ -390,6 +482,11 @@ html, body {
         display: flex;
         transition: background-color 0.2s ease-out;
 
+        @media (max-width: $rwd-width) {
+          padding: 2px 5px;
+
+        }
+
         i {
             font-size: 16px;
             margin-right: 3px;
@@ -401,6 +498,11 @@ html, body {
 
         &.online-counter {
             right: 0;
+
+            @media (max-width: $rwd-width) {
+              bottom: 0;
+              top: auto;
+            }
         }
     }
 }
@@ -413,15 +515,34 @@ html, body {
     margin: auto;
     width: calc(100% - 208px);
     height: 100%;
+    font-size: 0;
+    transition: filter 0.5s ease-out;
+
+    @media (max-width: $rwd-width) {
+      width: 100%;
+      height: auto;
+      margin: 0;
+    }
+
+    &.loading {
+      filter: blur(15px);
+    }
 
     > img {
       width: 100%;
-      max-width: 100%;
-      max-height: 100%;
+      max-width: 950px;
+      max-height: 100vh;
       position: absolute;
       top: 0;
       bottom: 0;
+      left: 0;
+      right: 0;
       margin: auto;
+
+      @media (max-width: $rwd-width) {
+        position: relative;
+        bottom: auto;
+      }
     }
 
     .playerBlocker {

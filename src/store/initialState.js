@@ -14,6 +14,7 @@ const initialState = {
   monitor: "1",
   player: null,
   pause: false,
+  loading: false,
   players: Map({
     1: new PlayerRec({
       src: "http://140.112.202.156:1001/stream",

@@ -5,7 +5,8 @@ const mapStateToProps = (state, ownProps) => ({
     active: ownProps.curMonitor.toString() === ownProps.monitor.toString(),
     counter: state.app.onlineCounter.get(ownProps.monitor.toString()) || 0,
     thumbnail: state.app.players.get(ownProps.monitor.toString()).thumbnail,
-    reload: state.app.reload
+    reload: state.app.reload,
+    lastReload: state.app.lastReload
 });
 
 const Monitor = connect(mapStateToProps)(monitor);

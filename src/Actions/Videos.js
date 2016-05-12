@@ -59,5 +59,6 @@ export const onLoad = createAction('ON_LOAD');
 
 export const updateFrames = createAction('UPDATE_FRAMES', (monitor, src) => ({ monitor, src }));
 
+export const toggleLoading = createAction('TOGGLE_LOADING');
 export const pause = createAction('PAUSE');
 export const reload = createAction('RELOAD');

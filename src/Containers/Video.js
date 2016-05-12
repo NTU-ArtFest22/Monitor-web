@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => ({
     monitor: state.app.monitor,
     error: state.app.players.get(state.app.monitor.toString()).error,
     pause: state.app.pause,
+    loading: state.app.loading,
     reload: state.app.reload
 });
 

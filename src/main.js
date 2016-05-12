@@ -14,7 +14,7 @@ import { configureFirebase, saveUid } from './Actions/ChatList';
 import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
 import { userRef } from './Actions/Monitors';
 import { controlUp, controlDown, controlLeft, controlRight,
-  controlInteract, controlStop, stopControl } from './Actions/Videos';
+  controlInteract, controlStop, stopControl, pause } from './Actions/Videos';
 
 // ========================================================
 // Browser History Setup
@@ -92,11 +92,15 @@ stageSocket.onmessage = (e) => {
     const len = store.getState().app.players.size;
 
     if (e.data === "client-up") {
+        store.dispatch(pause());
+        store.dispatch(pause());
         store.dispatch(controlStop());
         store.dispatch(controlUp());
         store.dispatch(push(`monitor/${cur > 1 ? cur - 1 : len}`));
     }
     else if (e.data === "client-down") {
+        store.dispatch(pause());
+        store.dispatch(pause());
         store.dispatch(controlStop());
         store.dispatch(controlDown());
         store.dispatch(push(`monitor/${cur < len ? cur + 1 : 1}`));

@@ -1,14 +1,14 @@
 import React from 'react';
-import { w3cwebsocket as W3cWebSocket } from 'websocket';
+import classNames from 'classnames';
 
 class Video extends React.Component {
     render () {
-        const { monitor, src, onError, error, togglePause, pause, thumbnail, onLoad, reload } = this.props;
+        const { monitor, src, onError, error, togglePause, pause, loading, thumbnail, onLoad, reload } = this.props;
 
         return (
-            <div className="playerWrapper">
+            <div className={classNames('playerWrapper', { loading })}>
               <img id={`monitor${monitor}`}
-                src={pause ? thumbnail : (error ? '/favicon.ico' : `${src}?r=${reload}`)}
+                src={loading ? '/favicon.ico' : (pause ? thumbnail : (error ? '/favicon.ico' : `${src}?r=${reload}`))}
                 onError={() => onError(monitor)}
                 onLoad={() => onLoad(monitor)}
                 onClick={togglePause} />

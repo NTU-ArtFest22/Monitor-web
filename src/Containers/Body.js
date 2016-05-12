@@ -9,7 +9,8 @@ const mapStateToProps = (state, ownProps) => ({
   curMonitor: ownProps.params.id,
   userRef: state.app.userRef,
   control: state.app.control,
-  controlStop: state.app.controlStop
+  controlStop: state.app.controlStop,
+  loading: state.app.loading
 });
 
 const mapDispatchToProps = (dispatch) => ({
