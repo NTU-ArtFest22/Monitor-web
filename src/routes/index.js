@@ -48,7 +48,9 @@ export const createRoutes = (store) => ({
         if (monitor !== nextMonitor) {
           store.dispatch(toggleLoading());
           store.dispatch(switchMonitor(nextMonitor));
-          store.dispatch(toggleLoading());
+          setTimeout(() => {
+            store.dispatch(toggleLoading());
+          }, 500);
         }
       }
     }
