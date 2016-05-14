@@ -9,6 +9,10 @@ const PlayerRec = Record({
   error: false
 });
 
+const HOST = window.location.hostname === 'localhost'
+  ? '140.112.202.156'
+  : '192.168.0.13';
+
 const initialState = {
   onlineCounter: Map(),
   presence: Map(),
@@ -18,24 +22,29 @@ const initialState = {
   loading: false,
   players: Map({
     '1': new PlayerRec({
-      src: "http://140.112.202.156:1001/stream",
-      thumbnail: "http://140.112.202.156:1001/snapshot",
-      ws: "ws://140.112.202.156:1001"
+      src: `http://${HOST}:1001/stream`,
+      thumbnail: `http://${HOST}:1001/snapshot`,
+      ws: `ws://${HOST}:1001`
     }),
     '2': new PlayerRec({
-      src: "http://140.112.202.156:1002/stream",
-      thumbnail: "http://140.112.202.156:1002/snapshot",
-      ws: "ws://140.112.202.156:1002"
+      src: `http://${HOST}:1002/stream`,
+      thumbnail: `http://${HOST}:1002/snapshot`,
+      ws: `ws://${HOST}:1002`
     }),
     '3': new PlayerRec({
-      src: "http://140.112.202.156:1003/stream",
-      thumbnail: "http://140.112.202.156:1003/snapshot",
-      ws: "ws://140.112.202.156:1003"
+      src: `http://${HOST}:1003/stream`,
+      thumbnail: `http://${HOST}:1003/snapshot`,
+      ws: `ws://${HOST}:1003`
     }),
     '4': new PlayerRec({
-      src: "http://140.112.202.156:1004/stream",
-      thumbnail: "http://140.112.202.156:1004/snapshot",
-      ws: "ws://140.112.202.156:1004"
+      src: `http://${HOST}:1004/stream`,
+      thumbnail: `http://${HOST}:1004/snapshot`,
+      ws: `ws://${HOST}:1004`
+    }),
+    '5': new PlayerRec({
+      src: `http://${HOST}:1005/stream`,
+      thumbnail: `http://${HOST}:1005/snapshot`,
+      ws: `ws://${HOST}:1005`
     })
   }),
   showChat: true,
