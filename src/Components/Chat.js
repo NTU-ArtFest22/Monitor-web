@@ -15,7 +15,7 @@ class Chat extends Component {
         const { user, monitor, children, userColor, sendTime, inActive } = this.props;
         return (
             <li className={ClassNames('chat', { inActive: inActive })}>
-                <Link className="chat-monitor" to={`monitor/${monitor}`}>
+                <Link className="chat-monitor" to={{ pathname: '/', query: { monitor } }}>
                     <i className="material-icons">videocam</i>
                     <span className="text">{monitor}</span>
                 </Link>

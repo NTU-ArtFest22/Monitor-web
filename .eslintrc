@@ -20,6 +20,7 @@
     "indent": 0,
     "quotes": 0,
     "brace-style": 0,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "jsx-quotes": 0
   }
 }

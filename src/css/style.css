@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
 $arrow-color: rgba(255, 193, 6, 0.3);
+$popup-color: rgba(255, 193, 6, 0.7);
 $arrow-hover-color: rgba(255, 193, 6, 1);
 $border-width: 5px;
 $rwd-width: 768px;
@@ -25,6 +26,7 @@ html, body {
         display: flex;
         width: 100%;
         height: 100%;
+        position: relative;
 
         @media (max-width: $rwd-width) {
           flex-direction: column;
@@ -421,16 +423,29 @@ html, body {
     flex-wrap: nowrap;
     height: 100%;
     width: 208px;
-    align-self: flex-end;
-    /*overflow: scroll;*/
-    overflow: visible;
+    overflow: scroll;
     padding: 30px 0;
     box-sizing: border-box;
+    position: relative;
 
     @media (max-width: $rwd-width) {
       width: 100%;
       height: 50px;
       padding: 0 20px;
+    }
+
+    .scroll-wrapper {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      position: relative;
+
+      @media (max-width: $rwd-width) {
+        height: 100%;
+        width: auto;
+        flex-direction: row;
+      }
     }
 }
 
@@ -457,6 +472,7 @@ html, body {
       height: 100%;
       float: left;
       width: 66.67px;
+      min-width: 66.67px;
       border-width: 3px;
     }
 
@@ -656,12 +672,52 @@ html, body {
         }
     }
 }
-.player {
-    position: relative;
+
+.legal-hint {
+  position: absolute;
+  top: -35px;
+  z-index: 1000;
+  height: auto;
+  width: 100%;
+  left: 0;
+  background-color: $popup-color;
+  color: #FFF;
+  padding: 5px 10px;
+  height: 35px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: top 0.5s ease-out;
+
+  @media (max-width: $rwd-width) {
+    height: 45px;
+    padding: 5px 30px;
+    top: -45px;
+
+    i {
+      line-height: 45px;
+    }
+  }
+
+  &.show {
+    top: 0px;
+  }
+
+  i {
+    font-size: 20px;
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    line-height: 35px;
+    right: 10px;
     top: 0;
-    left: 0;
     bottom: 0;
     margin: auto;
-    width: 100%;
-    height: 100%;
+  }
 }

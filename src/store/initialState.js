@@ -1,4 +1,5 @@
 import { Map, List, Record, OrderedMap } from 'immutable';
+import Cookies from 'cookies-js';
 
 const PlayerRec = Record({
   src: "http://108.61.200.60:5001/stream",
@@ -16,22 +17,22 @@ const initialState = {
   pause: false,
   loading: false,
   players: Map({
-    1: new PlayerRec({
+    '1': new PlayerRec({
       src: "http://140.112.202.156:1001/stream",
       thumbnail: "http://140.112.202.156:1001/snapshot",
       ws: "ws://140.112.202.156:1001"
     }),
-    2: new PlayerRec({
+    '2': new PlayerRec({
       src: "http://140.112.202.156:1002/stream",
       thumbnail: "http://140.112.202.156:1002/snapshot",
       ws: "ws://140.112.202.156:1002"
     }),
-    3: new PlayerRec({
+    '3': new PlayerRec({
       src: "http://140.112.202.156:1003/stream",
       thumbnail: "http://140.112.202.156:1003/snapshot",
       ws: "ws://140.112.202.156:1003"
     }),
-    4: new PlayerRec({
+    '4': new PlayerRec({
       src: "http://140.112.202.156:1004/stream",
       thumbnail: "http://140.112.202.156:1004/snapshot",
       ws: "ws://140.112.202.156:1004"
@@ -40,7 +41,8 @@ const initialState = {
   showChat: true,
   records: OrderedMap(),
   willScroll: true,
-  fireRef: null
+  fireRef: null,
+  showLegalHint: !Cookies.get('readLegalHint')
 };
 
 export default initialState;

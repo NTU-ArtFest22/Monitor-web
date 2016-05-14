@@ -3,6 +3,11 @@ import { Map, OrderedMap } from 'immutable';
 import initialState from '../store/initialState';
 
 const App = handleActions({
+    CLOSE_LEGAL_HINT: (state) => ({
+      ...state,
+      showLegalHint: false
+    }),
+
     CONFIGURE_FIREBASE: (state, action) => ({
         ...state,
         fireRef: action.payload
