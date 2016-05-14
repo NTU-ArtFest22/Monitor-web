@@ -6,12 +6,21 @@ class Video extends React.Component {
         const { monitor, src, onError, error, togglePause, pause, loading, thumbnail, onLoad, reload } = this.props;
 
         return (
-            <div className={classNames('playerWrapper', { loading })}>
+          <div className={classNames('playerWrapper', { loading })}>
+            <div className="player">
               <img id={`monitor${monitor}`}
                 src={loading ? '/favicon.ico' : (pause ? thumbnail : (error ? '/favicon.ico' : `${src}?r=${reload}`))}
                 onError={() => onError(monitor)}
                 onLoad={() => onLoad(monitor)}
                 onClick={togglePause} />
+                <div className="stream-status">
+                  {error
+                    ? (<span className="offline">OFFLINE</span>)
+                    : (<span className="online">ONLINE</span>)
+                  }
+                </div>
+            </div>
+
               {/*<div className="player" id={`monitor${monitor}`}>
                 {frames.map( (frame, z) => (
                   <img key={`frame${z}`} src={frame} style={{ zIndex: z }} />
