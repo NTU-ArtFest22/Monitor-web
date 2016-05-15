@@ -8,3 +8,5 @@ export const switchMonitor = createAction('SWITCH_MONITOR', monitor => {
     userRef.set(monitor.toString());
     return monitor.toString();
 });
+
+export const windowLoaded = createAction('WINDOW_LOADED');

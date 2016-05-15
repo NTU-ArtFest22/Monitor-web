@@ -8,7 +8,8 @@ const closeLegalHint = createAction('CLOSE_LEGAL_HINT');
 
 const mapStateToProps = (state) => ({
     showChat: state.app.showChat,
-    showLegalHint: state.app.showLegalHint
+    showLegalHint: state.app.showLegalHint,
+    windowLoaded: state.app.windowLoaded
 });
 
 const mapDispatchToProps = (dispatch) => ({

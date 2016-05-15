@@ -3,6 +3,10 @@ import { Map, OrderedMap } from 'immutable';
 import initialState from '../store/initialState';
 
 const App = handleActions({
+    WINDOW_LOADED: (state) => ({
+      ...state,
+      windowLoaded: true
+    }),
     CLOSE_LEGAL_HINT: (state) => ({
       ...state,
       showLegalHint: false

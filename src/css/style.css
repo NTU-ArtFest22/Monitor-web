@@ -232,11 +232,13 @@ html, body {
 }
 
 .chatroom {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
     height: 100vh;
     flex-basis: 100%;
-    // width: 340px;
     box-sizing: border-box;
     padding: 40px 20px;
     transform: translateX(0%);
@@ -246,6 +248,19 @@ html, body {
     @media (max-width: $rwd-width) {
       height: calc(100vh - 100vw / 640 * 480 - 50px);
       padding: 20px;
+    }
+
+    .logo {
+      > img {
+        width: 200px;
+        margin: auto;
+        display: block;
+        margin-bottom: 10px;
+
+        @media (max-width: $rwd-width) {
+          width: 150px;
+        }
+      }
     }
 
     .chatlist {
@@ -416,6 +431,7 @@ html, body {
         }
 
         .new-msg-hint {
+            display: none;
             position: absolute;
             top: -40px;
             width: 100%;
@@ -822,5 +838,23 @@ html, body {
     top: 0;
     bottom: 0;
     margin: auto;
+  }
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: block;
+  margin: auto;
+  z-index: 1000;
+  transition: opacity 1s ease-out;
+
+  &.loaded {
+    opacity: 0;
+    z-index: -1;
   }
 }

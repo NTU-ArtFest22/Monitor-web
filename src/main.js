@@ -12,7 +12,7 @@ import { w3cwebsocket as W3cWebSocket } from 'websocket';
 
 import { configureFirebase, saveUid } from './Actions/ChatList';
 import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
-import { userRef } from './Actions/Monitors';
+import { userRef, windowLoaded } from './Actions/Monitors';
 import { controlUp, controlDown, controlLeft, controlRight, controlInteract,
   controlStop, controlSetPause, controlSetPlay, stopControl, pause } from './Actions/Videos';
 
@@ -65,6 +65,10 @@ document.addEventListener(visibilityChange, () => {
     store.dispatch(controlSetPlay());
   }
 }, false);
+
+// window.onload = () => {
+//   store.dispatch(windowLoaded());
+// };
 
 // ========================================================
 // Firebase Setup
