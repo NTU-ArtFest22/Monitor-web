@@ -581,6 +581,7 @@ html, body {
       text-align: center;
       max-width: 950px;
       max-height: 100vh;
+      margin: auto;
 
       @media (max-width: $rwd-width) {
         position: relative;
