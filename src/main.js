@@ -13,8 +13,8 @@ import { w3cwebsocket as W3cWebSocket } from 'websocket';
 import { configureFirebase, saveUid } from './Actions/ChatList';
 import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
 import { userRef } from './Actions/Monitors';
-import { controlUp, controlDown, controlLeft, controlRight,
-  controlInteract, controlStop, stopControl, pause } from './Actions/Videos';
+import { controlUp, controlDown, controlLeft, controlRight, controlInteract,
+  controlStop, controlSetPause, controlSetPlay, stopControl, pause } from './Actions/Videos';
 
 // ========================================================
 // Browser History Setup
@@ -35,6 +35,17 @@ const store = createStore(initialState, browserHistory)
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.router
 });
+
+window.onblur = () => {
+  store.dispatch(controlStop());
+  store.dispatch(pause());
+  store.dispatch(controlSetPause());
+};
+window.onfocus = () => {
+  store.dispatch(controlStop());
+  store.dispatch(pause());
+  store.dispatch(controlSetPlay());
+};
 
 // ========================================================
 // Firebase Setup

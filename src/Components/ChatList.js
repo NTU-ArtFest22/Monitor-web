@@ -5,13 +5,14 @@ import Chat from '../Containers/Chat';
 
 const ChatList = React.createClass({
     componentDidMount() {
-        const { fireRef, setMsgToList, addMsgToList, removeMsgFromList, changeMsg, setWillScroll, saveUid } = this.props;
+        const { fireRef, connectedToChat, setMsgToList, addMsgToList, removeMsgFromList, changeMsg, setWillScroll, saveUid } = this.props;
         const dom = findDOMNode(this);
         this.setState({ dom });
 
         fireRef.limitToLast(15).once("value", (snapShot, prevChildKey) => {
             setMsgToList(snapShot.val());
             dom.scrollTop = dom.scrollHeight - dom.clientHeight;
+            connectedToChat();
         });
 
         fireRef.orderByChild('send_time').startAt(Date.now()).on("child_added", snapShot => {
@@ -35,9 +36,9 @@ const ChatList = React.createClass({
         return (
             <ul className="chatlist" onScroll={scrollHandler}>
                 {records.map( (record, id) => {
-                    let { user, monitor, msg, user_color, send_time, inActive } = record;
+                    let { user, user_name, monitor, msg, user_color, send_time, inActive } = record;
                     return (
-                        <Chat key={id} parent={this.state.dom} user={user} monitor={monitor} userColor={user_color} sendTime={send_time} inActive={inActive}>{msg}</Chat>
+                        <Chat key={id} parent={this.state.dom} user={user} userName={user_name} monitor={monitor} userColor={user_color} sendTime={send_time} inActive={inActive}>{msg}</Chat>
                     );
                 }).toArray()}
             </ul>

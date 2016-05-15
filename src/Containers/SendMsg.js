@@ -14,9 +14,9 @@ const mapDispatchToProps = (dispatch) => ({
     onSubmit: (event, uid, monitor) => {
         event.preventDefault();
         if (!input.value.trim()) return;
-        console.log('click', Date.now());
+
         sendMsg({
-            msg: input.value,
+            msg: input.value.substring(0, 100),
             user: uid,
             monitor
         });
@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
             if (!input.value.trim()) return;
 
             sendMsg({
-                msg: input.value,
+                msg: input.value.substring(0, 100),
                 user: uid,
                 monitor
             });

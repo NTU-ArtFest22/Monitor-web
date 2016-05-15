@@ -1,5 +1,5 @@
 import ChatList from '../Components/ChatList';
-import { saveUid, setMsgToList, addMsgToList, removeMsgFromList, setWillScroll } from '../Actions/ChatList';
+import { saveUid, setMsgToList, addMsgToList, removeMsgFromList, setWillScroll, connectedToChat } from '../Actions/ChatList';
 
 import { connect } from 'react-redux';
 
@@ -34,6 +34,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     saveUid: (uid) => {
         dispatch(saveUid(uid));
+    },
+    connectedToChat: () => {
+      dispatch(connectedToChat());
     }
 });
 

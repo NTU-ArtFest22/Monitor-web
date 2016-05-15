@@ -12,6 +12,7 @@ export const sendMsg = createAction('SEND_MSG', data => {
     fireRef.push({
         ...data,
         user_color: getColor({ text: data.user }),
+        user_name: data.user.substring(2, 8),
         send_time: Date.now()
     });
     return data;
@@ -28,3 +29,5 @@ export const removeMsgFromList = createAction('REMOVE_MSG_FROM_LIST');
 export const setWillScroll = createAction('SET_WILL_SCROLL');
 
 export const toggleShowChat = createAction('TOGGLE_SHOW_CHAT');
+
+export const connectedToChat = createAction('CONNECTED_TO_CHAT');

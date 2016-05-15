@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import video from '../Components/Video';
 import { setPlayer, sendControlMsg, controlLeft, controlRight, controlStop,
-  stopControl, controlInteract, onError, onLoad, updateFrames, pause, reload }
+  stopControl, controlInteract, controlPause, onError, onLoad, updateFrames, pause, reload }
   from '../Actions/Videos';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -56,6 +56,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     togglePause: () => {
       dispatch(pause());
+      dispatch(controlStop());
+      dispatch(controlPause());
     }
 });
 

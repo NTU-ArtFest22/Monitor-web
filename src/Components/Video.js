@@ -16,7 +16,7 @@ class Video extends React.Component {
                 <div className="stream-status">
                   {error
                     ? (<span className="offline">OFFLINE</span>)
-                    : (<span className="online">ONLINE</span>)
+                    : (pause ? (<span className="online pause">PAUSE</span>) : (<span className="online">ONLINE</span>))
                   }
                 </div>
             </div>

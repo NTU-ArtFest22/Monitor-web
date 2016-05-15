@@ -21,6 +21,15 @@ const App = handleActions({
         userRef: action.payload
     }),
 
+    CONNECTED_TO_CHAT: (state) => ({
+      ...state,
+      records: state.records.set('system:connected_to_chat', {
+        msg: '歡迎加入聊天室！',
+        user: 'system',
+        send_time: Date.now(),
+        user_color: '#ffc106'
+      })
+    }),
     SET_MSG_TO_LIST: (state, action) => ({
         ...state,
         records: OrderedMap(action.payload).map(record => ({ ...record, inActive: true }))
@@ -109,6 +118,18 @@ const App = handleActions({
     CONTROL_STOP: state => ({
         ...state,
         control: 'stop'
+    }),
+    CONTROL_PAUSE: state => ({
+      ...state,
+      control: state.pause ? 'pause' : 'play'
+    }),
+    CONTROL_SET_PAUSE: state => ({
+      ...state,
+      control: 'pause'
+    }),
+    CONTROL_SET_PLAY: state => ({
+      ...state,
+      control: 'play'
     }),
     STOP_CONTROL: state => ({
         ...state,

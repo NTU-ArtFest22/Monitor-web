@@ -16,6 +16,10 @@ const mapControlToIconName = control => {
       return 'arrow_backward';
     case 'interact':
       return 'touch_app';
+    case 'pause':
+      return 'pause';
+    case 'play':
+      return 'play_arrow';
     default:
       return '';
   }
