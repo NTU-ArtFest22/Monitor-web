@@ -241,6 +241,7 @@ html, body {
     flex-basis: 100%;
     box-sizing: border-box;
     padding: 40px 20px;
+    padding-top: 20px;
     transform: translateX(0%);
     transition: transform 0.5s ease-out;
     background-color: #F5F5F5;
@@ -252,7 +253,7 @@ html, body {
 
     .logo {
       > img {
-        width: 200px;
+        width: 250px;
         margin: auto;
         display: block;
         margin-bottom: 10px;

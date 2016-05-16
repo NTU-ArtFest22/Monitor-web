@@ -9,9 +9,7 @@ const PlayerRec = Record({
   error: false
 });
 
-const HOST = window.location.hostname === 'localhost'
-  ? '192.168.0.13'
-  : '140.112.202.156';
+const HOST = '104.199.152.44';
 
 const initialState = {
   onlineCounter: Map(),

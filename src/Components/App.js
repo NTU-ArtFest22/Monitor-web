@@ -9,7 +9,7 @@ const App = ({ showChat, children, showLegalHint, closeLegalHint, windowLoaded }
     {children}
     <div className={classNames('chatroom', { 'showChat': showChat })}>
       <a className="logo" target="_blank" href="https://www.facebook.com/NTUartfest/photos/a.165603326811433.29577.157551030949996/1057585507613206/?type=3&theater">
-        <img src="/logo.png" />
+        <img src={window.innerWidth > 768 ? '/logo.png' : '/logo2.png'} />
       </a>
       <ChatList />
       <SendMsg />
