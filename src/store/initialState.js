@@ -9,7 +9,9 @@ const PlayerRec = Record({
   error: false
 });
 
-const HOST = '104.199.152.44';
+const HOST = window.location.hostname === 'localhost'
+  ? '140.112.91.176:8'
+  : '104.199.152.44:1';
 
 const initialState = {
   onlineCounter: Map(),
@@ -20,29 +22,29 @@ const initialState = {
   loading: false,
   players: Map({
     '1': new PlayerRec({
-      src: `http://${HOST}:1001/stream`,
-      thumbnail: `http://${HOST}:1001/snapshot`,
-      ws: `ws://${HOST}:1001`
+      src: `http://${HOST}001/stream`,
+      thumbnail: `http://${HOST}001/snapshot`,
+      ws: `ws://${HOST}001`
     }),
     '2': new PlayerRec({
-      src: `http://${HOST}:1002/stream`,
-      thumbnail: `http://${HOST}:1002/snapshot`,
-      ws: `ws://${HOST}:1002`
+      src: `http://${HOST}002/stream`,
+      thumbnail: `http://${HOST}002/snapshot`,
+      ws: `ws://${HOST}002`
     }),
     '3': new PlayerRec({
-      src: `http://${HOST}:1003/stream`,
-      thumbnail: `http://${HOST}:1003/snapshot`,
-      ws: `ws://${HOST}:1003`
+      src: `http://${HOST}003/stream`,
+      thumbnail: `http://${HOST}003/snapshot`,
+      ws: `ws://${HOST}003`
     }),
     '4': new PlayerRec({
-      src: `http://${HOST}:1004/stream`,
-      thumbnail: `http://${HOST}:1004/snapshot`,
-      ws: `ws://${HOST}:1004`
+      src: `http://${HOST}004/stream`,
+      thumbnail: `http://${HOST}004/snapshot`,
+      ws: `ws://${HOST}004`
     }),
     '5': new PlayerRec({
-      src: `http://${HOST}:1005/stream`,
-      thumbnail: `http://${HOST}:1005/snapshot`,
-      ws: `ws://${HOST}:1005`
+      src: `http://${HOST}005/stream`,
+      thumbnail: `http://${HOST}005/snapshot`,
+      ws: `ws://${HOST}005`
     })
   }),
   showChat: true,
