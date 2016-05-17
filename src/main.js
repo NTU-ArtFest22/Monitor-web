@@ -9,12 +9,15 @@ require('./css/style.css');
 import initialState from './store/initialState';
 import Firebase from 'firebase';
 import { w3cwebsocket as W3cWebSocket } from 'websocket';
+import Cookies from 'cookies-js';
 
-import { configureFirebase, saveUid } from './Actions/ChatList';
+import { configureFirebase, saveUid, connectedToChat } from './Actions/ChatList';
 import { setPresence, counterChanged, counterAdded, counterRemoved } from './Actions/Socket';
-import { userRef, windowLoaded } from './Actions/Monitors';
+import { userRef, saveName } from './Actions/Monitors';
 import { controlUp, controlDown, controlLeft, controlRight, controlInteract,
   controlStop, controlSetPause, controlSetPlay, stopControl, pause } from './Actions/Videos';
+
+import randomlyChooseName from './store/names';
 
 // ========================================================
 // Browser History Setup
@@ -66,16 +69,13 @@ document.addEventListener(visibilityChange, () => {
   }
 }, false);
 
-// window.onload = () => {
-//   store.dispatch(windowLoaded());
-// };
-
 // ========================================================
 // Firebase Setup
 // ========================================================
 const fireRef = new Firebase('https://monitor-web.firebaseio.com/records');
 const presenceRef = new Firebase('https://monitor-web.firebaseio.com/presence');
 const connectedRef = new Firebase('https://monitor-web.firebaseio.com/.info/connected');
+const namesRef = new Firebase('https://monitor-web.firebaseio.com/names');
 
 store.dispatch(configureFirebase(fireRef));
 
@@ -87,6 +87,22 @@ connectedRef.on('value', snap => {
       }
       else {
         store.dispatch(saveUid(authData.uid));
+
+        namesRef.once('value', snap => {
+          let name = Cookies.get('userName') || randomlyChooseName();
+
+          if (snap.val()) {
+            while (snap.val()[name]) {
+              name = randomlyChooseName();
+            }
+          }
+
+          console.log(name);
+
+          namesRef.push(name).onDisconnect().remove();
+          store.dispatch(saveName(name));
+          store.dispatch(connectedToChat());
+        });
       }
     });
 

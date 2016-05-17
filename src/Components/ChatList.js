@@ -12,7 +12,6 @@ const ChatList = React.createClass({
         fireRef.limitToLast(15).once("value", (snapShot, prevChildKey) => {
             setMsgToList(snapShot.val());
             dom.scrollTop = dom.scrollHeight - dom.clientHeight;
-            connectedToChat();
         });
 
         fireRef.orderByChild('send_time').startAt(Date.now()).on("child_added", snapShot => {

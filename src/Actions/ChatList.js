@@ -12,7 +12,6 @@ export const sendMsg = createAction('SEND_MSG', data => {
     fireRef.push({
         ...data,
         user_color: getColor({ text: data.user }),
-        user_name: data.user.substring(2, 8),
         send_time: Date.now()
     });
     return data;

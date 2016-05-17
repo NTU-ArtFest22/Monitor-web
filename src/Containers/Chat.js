@@ -1,8 +1,11 @@
 import { connect } from 'react-redux';
 import chat from '../Components/Chat';
+import { getColor } from 'random-material-color';
 
 const mapStateToProps = (state) => ({
-    willScroll: state.app.willScroll
+    willScroll: state.app.willScroll,
+    yourName: state.app.userName,
+    yourColor: getColor({ text: state.app.uid })
 });
 
 const mapDispatchToProps = (dispatch) => ({

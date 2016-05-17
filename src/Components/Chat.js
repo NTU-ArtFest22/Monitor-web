@@ -12,12 +12,15 @@ class Chat extends Component {
     }
 
     render () {
-        const { user, userName, monitor, children, userColor, sendTime, inActive } = this.props;
+        const { yourName, yourColor, user, userName, monitor, children, userColor, sendTime, inActive } = this.props;
 
         if (user === 'system') {
           return (
             <li className="chat">
-              <span className="content" style={{ color: userColor }}>{children}</span>
+              <span className="content" style={{ color: userColor }}>
+                {children}
+                <span style={{ color: yourColor }}>{yourName}</span>
+              </span>
               <span className="send-time">{dateFormat(new Date(sendTime), 'HH:MM:ss')}</span>
             </li>
           );

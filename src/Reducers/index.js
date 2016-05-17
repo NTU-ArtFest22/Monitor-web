@@ -20,6 +20,10 @@ const App = handleActions({
         ...state,
         uid: action.payload
     }),
+    SAVE_NAME: (state, action) => ({
+      ...state,
+      userName: action.payload
+    }),
     SAVE_USER_REF: (state, action) => ({
         ...state,
         userRef: action.payload
