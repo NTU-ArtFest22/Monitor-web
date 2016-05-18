@@ -612,6 +612,10 @@ html, body {
         max-height: 100vh;
         position: relative;
         margin: auto;
+
+        @media (max-width: $rwd-width) {
+          height: calc(100vw / 640 * 480);
+        }
       }
 
       &:hover .stream-status span {
