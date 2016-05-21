@@ -9,7 +9,7 @@ const ChatList = React.createClass({
         const dom = findDOMNode(this);
         this.setState({ dom });
 
-        fireRef.limitToLast(15).once("value", (snapShot, prevChildKey) => {
+        fireRef.limitToLast(30).once("value", (snapShot, prevChildKey) => {
             setMsgToList(snapShot.val());
             dom.scrollTop = dom.scrollHeight - dom.clientHeight;
         });
