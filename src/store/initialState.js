@@ -45,6 +45,11 @@ const initialState = {
       src: `http://${HOST}005/stream`,
       thumbnail: `http://${HOST}005/snapshot`,
       ws: `ws://${HOST}005`
+    }),
+    '6': new PlayerRec({
+      src: `http://${HOST}006/stream`,
+      thumbnail: `http://${HOST}006/snapshot`,
+      ws: `ws://${HOST}006`
     })
   }),
   showChat: true,
