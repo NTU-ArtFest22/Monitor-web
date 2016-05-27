@@ -15,9 +15,10 @@ const App = ({ showChat, children, showLegalHint, closeLegalHint, windowLoaded }
       <SendMsg />
     </div>
 
-    <div className={classNames('legal-hint', { show: showLegalHint })} onClick={closeLegalHint}>
-      <span>畫面禁止截圖或翻拍，如因自行截圖或翻拍產生任何糾紛後果自負。</span>
-      <i className="material-icons">close</i>
+    <div className={classNames('legal-hint', { show: showLegalHint })}>
+      {/*<span>畫面禁止截圖或翻拍，如因自行截圖或翻拍產生任何糾紛後果自負。</span>*/}
+      <span>活動已經結束！謝謝大家的參與。</span>
+      {/*<i className="material-icons">close</i>*/}
     </div>
 
     {/*<img className={classNames('banner', { loaded: windowLoaded })} src="/banner.png" />*/}

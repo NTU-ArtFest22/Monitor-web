@@ -66,7 +66,8 @@ const initialState = {
   records: OrderedMap(),
   willScroll: true,
   fireRef: null,
-  showLegalHint: !Cookies.get('readLegalHint'),
+  // showLegalHint: !Cookies.get('readLegalHint'),
+  showLegalHint: true,
   widnowLoaded: false
 };
 
